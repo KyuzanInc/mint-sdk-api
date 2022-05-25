@@ -1,0 +1,1605 @@
+openapi: 3.0.0
+info:
+  title: sdk_api
+  version: '4.0'
+servers:
+  - url: 'http://localhost:5500/mint-v2-development/asia-northeast1/'
+paths:
+  /sdk_v4/items:
+    get:
+      operationId: GetItems
+      summary: プロジェクトのItemを全て取得する
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - in: query
+          name: saleStatus
+          schema:
+            type: string
+            enum:
+              - beforeStart
+              - beforeEnd
+              - afterEnd
+          required: false
+        - in: query
+          name: onlyAvailableStock
+          schema:
+            type: string
+            enum:
+              - 'true'
+              - 'false'
+          required: false
+        - in: query
+          name: paymentMethod
+          schema:
+            type: string
+            enum:
+              - ethereum-contract-erc721-shop-fixed-price
+              - ethereum-contract-erc721-shop-auction
+              - credit-card-stripe-fixed-price
+          required: false
+        - in: query
+          description: ', 区切りで指定'
+          name: tags
+          style: form
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+            enum:
+              - price
+          required: false
+        - $ref: '#/components/parameters/SortDirection'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Item'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  '/sdk_v4/items/{itemId}':
+    get:
+      operationId: GetItemById
+      summary: プロジェクトのItemをId指定で取得する
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - schema:
+            type: string
+          name: itemId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Item'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/items/getSellableItemStockERC721Id:
+    get:
+      operationId: GetSellableItemStockERC721Id
+      summary: スマコンで販売している`Item`の販売可能な(まだ売れていない)`ItemStockId`を取得する
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - in: query
+          name: itemId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      itemStockId:
+                        type: string
+                    required:
+                      - itemStockId
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/items/getItemByTokenERC721:
+    get:
+      operationId: GetItemByTokenERC721
+      summary: get item by tokenERC721 id
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - in: query
+          name: tokenId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/Item'
+                    nullable: true
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+
+  /sdk_v4/itemStocks/sign:
+    get:
+      operationId: GetSignByItemStockId
+      summary: Item購入に関してスマコンの操作に必要なSignを返す
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - in: query
+          name: itemStockId
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: signatureType
+          schema:
+            $ref: '#/components/schemas/SignatureType'
+          required: true
+        - in: query
+          description: '購入時のみ必須'
+          name: walletAddress
+          schema:
+            type: string
+          required: false
+        - in: query
+          description: '購入時のみ必須'
+          name: residence
+          schema:
+            type: string
+            enum:
+              - jp
+              - unknown
+          required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      signature:
+                        type: string
+                      contractMethodArg:
+                        description: 対応したコントラクトのメソッドに渡す
+                        type: array
+                        items:
+                          anyOf:
+                            - type: string
+                            - type: number
+                            - type: integer
+                            - type: boolean
+                            - type: array
+                              items: {}
+                            - type: object
+                    required:
+                      - signature
+                      - contractMethodArg
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  '/sdk_v4/itemStocks/getById':
+    get:
+      operationId: GetItemStockById
+      summary: ItemStockをId指定で取得する
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - schema:
+            type: string
+          name: itemStockId
+          in: query
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ItemStock'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/itemStocks/getBiddedItemStocksByWalletAddress:
+    get:
+      operationId: GetBiddedItemStocksByWalletAddress
+      summary: 指定したwalletAddressでBidしたItemStockを取得する
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/WalletAddress'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - in: query
+          name: onlyBeforeEnd
+          schema:
+            type: string
+          required: false
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+            enum:
+              - price
+              - endAt
+          required: false
+        - $ref: '#/components/parameters/SortDirection'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ItemStock'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/itemStocks/getBoughtItemStocksByWalletAddress:
+    get:
+      operationId: GetBoughtItemStocksByWalletAddress
+      summary: 指定したwalletAddressで購入または落札したItemStockを取得する
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/WalletAddress'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+        - in: query
+          name: sortBy
+          schema:
+            type: string
+            enum:
+              - price
+              - createAt
+          required: false
+        - $ref: '#/components/parameters/SortDirection'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      itemStocks:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ItemStock'
+                    required:
+                      - itemStocks
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  '/sdk_v4/itemStockPhysicalShippingInfos/getItemStockPhysicalShippingInfoStatusByItemStockId':
+    get:
+      operationId: GetItemStockPhysicalShippingInfoStatusByItemStockId
+      summary: API for getting item stock physical shipping info status by item stock id
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - schema:
+            type: string
+          name: itemStockId
+          in: query
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ItemStockPhysicalShippingInfoStatus'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  '/sdk_v4/itemStockPhysicalShippingInfos/getItemStockPhysicalShippingInfoByItemStockId':
+    post:
+      operationId: GetItemStockPhysicalShippingInfoByItemStockId
+      summary: API for getting item stock physical shipping info by item stock id
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - schema:
+            type: string
+          name: itemStockId
+          in: query
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    domain:
+                      $ref: '#/components/schemas/SignatureDomain'
+                    primaryType:
+                      type: string
+                    message:
+                      type: object
+                      properties:
+                        walletAddress:
+                          type: string
+                        requestTimestamp:
+                          type: string
+                          pattern: "^\\d+$"
+                    types:
+                      type: object
+                  required:
+                    - domain
+                    - message
+                    - types
+                    - primaryType
+                signature:
+                  type: string
+              required:
+                - data
+                - signature
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ItemStockPhysicalShippingInfo'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '403':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  '/sdk_v4/itemStockPhysicalShippingInfos/createOrUpdateItemStockPhysicalShippingInfo':
+    post:
+      operationId: CreateOrUpdateItemStockPhysicalShippingInfo
+      summary: API for creating or updating item stock physical shipping info for given item stock id
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - schema:
+            type: string
+          name: itemStockId
+          in: query
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: object
+                  properties:
+                    domain:
+                      $ref: '#/components/schemas/SignatureDomain'
+                    primaryType:
+                      type: string
+                    message:
+                      $ref: '#/components/schemas/CreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage'
+                    types:
+                      type: object
+                  required:
+                    - domain
+                    - message
+                    - types
+                    - primaryType
+                signature:
+                  type: string
+              required:
+                - data
+                - signature
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: string
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '403':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/products/getProductERC721ById:
+    get:
+      operationId: GetProductERC721ById
+      summary: Itemにパックされていて、ItemのstatusがpublishなProductERC721を取得
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - in: query
+          name: id
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/ProductERC721'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  '/sdk_v4/paymentIntents/{paymentIntentId}':
+    get:
+      operationId: GetPaymentIntentById
+      summary: This API is responsible to get payment intent by its id
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - schema:
+            type: string
+          name: paymentIntentId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/GetPaymentIntentByIdResponseBodyData'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+        '403':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/tokens/getTokenERC721sByWalletAddress:
+    get:
+      operationId: GetTokenERC721sByWalletAddress
+      summary: walletAddressに紐づくTokenERC721を全て取得する
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/WalletAddress'
+        - $ref: '#/components/parameters/Page'
+        - $ref: '#/components/parameters/PerPage'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TokenERC721'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/tokens/hasNfts:
+    get:
+      operationId: HasNfts
+      summary: has nfts or not in contract
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/WalletAddress'
+        - in: query
+          name: contractAddress
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: boolean
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/tokens/hasNft:
+    get:
+      operationId: HasNft
+      summary: has token id of nft or not in contract
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/WalletAddress'
+        - in: query
+          name: contractAddress
+          schema:
+            type: string
+          required: true
+        - in: query
+          name: tokenId
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: boolean
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/tokens/getTokentERC721sByWalletAddressFromAnyContract:
+    get:
+      operationId: GetTokentERC721sByWalletAddressFromAnyContract
+      summary: 'get TokenERC721s by specifying wallet address and contract address'
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - $ref: '#/components/parameters/WalletAddress'
+        - in: query
+          name: contractAddress
+          schema:
+            type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TokenERC721'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/tokens/{tokenId}:
+    get:
+      operationId: GetTokenERC721ById
+      summary: 'get TokenERC721 by Id'
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - schema:
+            type: string
+          name: tokenId
+          in: path
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    $ref: '#/components/schemas/TokenERC721'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+        '403':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/profile:
+    post:
+      summary: ウォレットに紐づくプロフィールの作成
+      operationId: UpdateProfile
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      profile:
+                        $ref: '#/components/schemas/WalletAddressProfile'
+                  meta:
+                    type: object
+        '400':
+          $ref: '#/components/responses/Error'
+        '401':
+          $ref: '#/components/responses/Error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                profile:
+                  $ref: '#/components/schemas/WalletAddressProfile'
+                signature:
+                  type: string
+              required:
+                - profile
+                - signature
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+    get:
+      summary: ウォレットに紐づくプロフィールの取得
+      operationId: GetProfile
+      description: 'プロフィールがない場合はnullがdataの値に入る'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    nullable: true
+                    required:
+                      - profile
+                      - avatarImageUrl
+                    properties:
+                      profile:
+                        $ref: '#/components/schemas/WalletAddressProfile'
+                      avatarImageUrl:
+                        type: string
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '404':
+          $ref: '#/components/responses/Error'
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - schema:
+            type: string
+          in: query
+          name: walletAddress
+          required: true
+  /sdk_v4/avatar:
+    get:
+      summary: アバター画像の署名付きURLの取得
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    type: object
+                  data:
+                    type: object
+                    properties:
+                      imageId:
+                        type: string
+                      uploadSignedUrl:
+                        type: string
+                      readSignedUrl:
+                        type: string
+                    required:
+                      - imageId
+                      - uploadSignedUrl
+                      - readSignedUrl
+        '404':
+          $ref: '#/components/responses/Error'
+      operationId: GetAvatar
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+  '/sdk_v4/contracts/getContractERC721ById':
+    get:
+      operationId: getContractERC721ById
+      summary: ContractERC721をId指定で取得する
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+        - schema:
+            type: string
+          name: contractId
+          in: query
+          required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    nullable: true
+                    $ref: '#/components/schemas/ContractERC721'
+                  meta:
+                    type: object
+                required:
+                  - data
+                  - meta
+        '400':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+  /sdk_v4/stripePayment/createStripePaymentIntent:
+    post:
+      operationId: CreateStripePaymentIntent
+      summary: 'クレジットカード(Stripe)で指定のアイテムを購入するためのPyamentIntentを作成し、対応するSecretを返す'
+      parameters:
+        - $ref: '#/components/parameters/AccessToken'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                itemId:
+                  description: 'Item id that will be purchased'
+                  type: string
+                toAddress:
+                  description: 'Buyer wallet address'
+                  type: string
+                userResidence:
+                  description: 'Buyer residence'
+                  $ref: '#/components/schemas/UserResidence'
+              required:
+                - itemId
+                - toAddress
+                - userResidence
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  publishableKey:
+                    description: クライアント側でloadStripeに対して渡す公開可能なAPI-Key
+                    type: string
+                  secret:
+                    description: StripeのPaymentIntentのClientSecret
+                    type: string
+                required:
+                  - publishableKey
+                  - secret
+components:
+  schemas:
+    Item:
+      type: object
+      properties:
+        id:
+          type: string
+        createAt:
+          type: string
+          format: date-time
+        updateAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        description:
+          type: string
+        previews:
+          description: Itemのプレビュー用URL
+          type: array
+          items:
+            $ref: '#/components/schemas/PreviewMedia'
+        type:
+          description: アイテムの種類
+          $ref: '#/components/schemas/ItemType'
+        startAt:
+          type: string
+          format: date-time
+        endAt:
+          type: string
+          format: date-time
+        price:
+          type: number
+        cryptoCurrencyRate:
+          nullable: true
+          $ref: '#/components/schemas/CryptoCurrencyRate'
+        feeRatePermill:
+          description: Mintに支払われる取引手数料
+          type: number
+        tags:
+          description: 任意のTag
+          type: array
+          items:
+            type: string
+        paymentMethodData:
+          description: paymentMethodによって異なるデータ
+          oneOf:
+            - $ref: '#/components/schemas/ItemPaymentMethodDataEthereumContractERC721ShopFixedPrice'
+            - $ref: '#/components/schemas/ItemPaymentMethodDataEthereumContractERC721ShopAuction'
+            - $ref: '#/components/schemas/ItemPaymentMethodDataCreditCardStripeFixedPrice'
+        itemStockIds:
+          type: array
+          items:
+            type: string
+        availableStockNum:
+          type: number
+        productERC721Ids:
+          type: array
+          items:
+            type: string
+        bids:
+          description: オークションItem以外は空配列が入る
+          type: array
+          items:
+            $ref: '#/components/schemas/Bid'
+        metadata:
+          type: object
+          nullable: true
+      required:
+        - id
+        - createAt
+        - updateAt
+        - name
+        - description
+        - previews
+        - type
+        - startAt
+        - endAt
+        - price
+        - feeRatePermill
+        - cryptoCurrencyRate
+        - tags
+        - paymentMethodData
+        - availableStockNum
+        - itemStockIds
+        - productERC721Ids
+        - metadata
+        - bids
+    ItemStockPhysicalShippingInfo:
+      type: object
+      description: ItemStockPhysicalShippingInfo data model
+      properties:
+        id:
+          type: string
+          nullable: true
+        firstName:
+          type: string
+        lastName:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        postalCode:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        address1:
+          type: string
+        phoneNumber:
+          type: string
+        address2:
+          type: string
+          nullable: true
+        address3:
+          type: string
+          nullable: true
+        status:
+          $ref: '#/components/schemas/ItemStockPhysicalShippingInfoStatus'
+      required:
+        - firstName
+        - lastName
+        - country
+        - email
+        - postalCode
+        - city
+        - state
+        - address1
+        - phoneNumber
+        - address2
+        - address3
+        - status
+        - id
+    CreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage:
+      type: object
+      description: Request body data model for CreateOrUpdateItemStockPhysicalShippingInfo API
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        postalCode:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        address1:
+          type: string
+        phoneNumber:
+          type: string
+        address2:
+          type: string
+          nullable: true
+        address3:
+          type: string
+          nullable: true
+        requestTimestamp:
+          type: string
+          pattern: "^\\d+$"
+      required:
+        - firstName
+        - lastName
+        - country
+        - email
+        - postalCode
+        - city
+        - state
+        - address1
+        - phoneNumber
+        - address2
+        - address3
+        - requestTimestamp
+    GetPaymentIntentByIdResponseBodyData:
+      type: object
+      properties:
+        cryptoPaymentIntentId:
+          type: string
+        contractMethodResource:
+          type: object
+          properties:
+            contractAddress:
+              type: string
+            networkId:
+              $ref: '#/components/schemas/NetworkId'
+            chainType:
+              $ref: '#/components/schemas/ChainType'
+            methodName:
+              type: string
+            abi:
+              type: string
+            args:
+              type: array
+              items:
+                oneOf:
+                  - type: string
+                  - type: number
+                  - type: integer
+                  - type: boolean
+                  - type: array
+                    items: {}
+                  - type: object
+
+          required:
+            - contractAddress
+            - networkId
+            - chainType
+            - methodName
+            - abi
+            - args
+      required:
+        - cryptoPaymentIntentId
+        - contractMethodResource
+    SignatureDomain:
+      type: object
+      properties:
+        chainId:
+          $ref: '#/components/schemas/NetworkIdString'
+        name:
+          type: string
+        version:
+          type: string
+      required:
+        - chainId
+        - name
+        - version
+    ItemPaymentMethodDataEthereumContractERC721ShopFixedPrice:
+      type: object
+      properties:
+        paymentMethod:
+          type: string
+          enum:
+            - ethereum-contract-erc721-shop-fixed-price
+        contractDataERC721Shop:
+          $ref: '#/components/schemas/ContractDataERC721Shop'
+      required:
+        - paymentMethod
+        - contractDataERC721Shop
+    ItemPaymentMethodDataEthereumContractERC721ShopAuction:
+      type: object
+      properties:
+        paymentMethod:
+          type: string
+          enum:
+            - ethereum-contract-erc721-shop-auction
+        contractDataERC721Shop:
+          $ref: '#/components/schemas/ContractDataERC721Shop'
+        minBidPercentage:
+          type: number
+        defaultEndAt:
+          type: string
+          format: date-time
+      required:
+        - paymentMethod
+        - contractDataERC721Shop
+        - minBidPercentage
+        - defaultEndAt
+    ItemPaymentMethodDataCreditCardStripeFixedPrice:
+      type: object
+      properties:
+        paymentMethod:
+          type: string
+          enum:
+            - credit-card-stripe-fixed-price
+        currency:
+          $ref: '#/components/schemas/CreditCardStripeCurrencyType'
+      required:
+        - paymentMethod
+        - currency
+    CreditCardStripeCurrencyType:
+      type: string
+      description: Stripeで利用する通貨型
+      enum: # Stripe Supported currencies: https://stripe.com/docs/currencies
+        - jpy
+        - usd
+        - eur
+    ContractDataERC721Shop:
+      type: object
+      description: ContractERC721またはContractERC721Shopに必要なデータ
+      properties:
+        chainType:
+          $ref: '#/components/schemas/ChainType'
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        contractAddress:
+          type: string
+        abi:
+          description: JSON.stringifyしたもの
+          type: string
+      required:
+        - chainType
+        - networkId
+        - contractAddress
+        - abi
+    ItemStock:
+      type: object
+      properties:
+        id:
+          type: string
+        createAt:
+          type: string
+          format: date-time
+        updateAt:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/ItemStockStatus'
+        productsData:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductERC721'
+        item:
+          $ref: '#/components/schemas/Item'
+      required:
+        - id
+        - createAt
+        - updateAt
+        - status
+        - item
+        - productsData
+    ContractERC721:
+      type: object
+      description: ContractERC721のデータ
+      properties:
+        id:
+          type: string
+        createAt:
+          type: string
+          format: date-time
+        updateAt:
+          type: string
+          format: date-time
+        name:
+          type: string
+        chainType:
+          $ref: '#/components/schemas/ChainType'
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        address:
+          type: string
+        initialDeployBlockNumber:
+          type: number
+        tokenStandardType:
+          $ref: '#/components/schemas/TokenStandardType'
+      required:
+        - id
+        - createAt
+        - updateAt
+        - name
+        - chainType
+        - networkId
+        - address
+        - initialDeployBlockNumber
+        - tokenStandardType
+    ProductERC721:
+      type: object
+      properties:
+        id:
+          type: string
+        createAt:
+          type: string
+          format: date-time
+        updateAt:
+          type: string
+          format: date-time
+        status:
+          type: string
+          enum:
+            - created
+            - packed-in-item
+            - tx-progressing
+            - minted
+            - archived
+        tokenStandardType:
+          $ref: '#/components/schemas/TokenStandardType'
+        contractERC721Id:
+          type: string
+        tokenId:
+          type: number
+        tokenURI:
+          type: string
+          nullable: true
+        creatorAddress:
+          type: string
+        metadata:
+          type: object
+          nullable: true
+        itemStockDocumentId:
+          type: string
+          nullable: true
+        productBlueprintId:
+          type: string
+          nullable: true
+        productGroupId:
+          type: string
+          nullable: true
+      required:
+        - id
+        - createAt
+        - updateAt
+        - status
+        - tokenStandardType
+        - contractERC721Id
+        - tokenId
+        - tokenURI
+        - creatorAddress
+        - metadata
+        - itemStockDocumentId
+        - productBlueprintId
+        - productGroupId
+    TokenERC721:
+      type: object
+      properties:
+        id:
+          type: string
+        createAt:
+          type: string
+          format: date-time
+        updateAt:
+          type: string
+          format: date-time
+        tokenStandardType:
+          $ref: '#/components/schemas/TokenStandardType'
+        contractERC721Id:
+          type: string
+        tokenId:
+          type: number
+        tokenURI:
+          type: string
+        metadata:
+          type: object
+        mintTransactionHash:
+          type: string
+        initialOwnerAddress:
+          type: string
+        currentOwnerAddress:
+          type: string
+        transferHistory:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransferData'
+      required:
+        - id
+        - createAt
+        - updateAt
+        - tokenStandardType
+        - contractERC721Id
+        - tokenId
+        - tokenURI
+        - mintTransactionHash
+        - initialOwnerAddress
+        - currentOwnerAddress
+        - transferHistory
+        - metadata
+    Bid:
+      type: object
+      properties:
+        id:
+          type: string
+        chainType:
+          $ref: '#/components/schemas/ChainType'
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        createAt:
+          type: string
+          format: date-time
+        updateAt:
+          type: string
+          format: date-time
+        itemDocumentId:
+          type: string
+        bidder:
+          type: string
+        bidPrice:
+          type: number
+        cryptoCurrencyRate:
+          nullable: true
+          $ref: '#/components/schemas/CryptoCurrencyRate'
+        transactionAt:
+          type: string
+          format: date-time
+        transactionHash:
+          type: string
+      required:
+        - id
+        - networkId
+        - chainType
+        - createAt
+        - updateAt
+        - itemDocumentId
+        - bidder
+        - bidPrice
+        - cryptoCurrencyRate
+        - transactionAt
+        - transactionHash
+    CryptoCurrencyRate:
+      type: object
+      properties:
+        createAt:
+          type: string
+          format: date-time
+        updateAt:
+          type: string
+          format: date-time
+        currency:
+          $ref: '#/components/schemas/CryptoCurrencyType'
+        jpy:
+          type: number
+        eur:
+          type: number
+        usd:
+          type: number
+      required:
+        - createAt
+        - updateAt
+        - currency
+        - eur
+        - usd
+        - jpy
+    ItemType:
+      description: アイテムの種類
+      type: string
+      enum:
+        - normal
+        - with-physical-item
+    TokenStandardType:
+      type: string
+      default: ERC721
+      enum:
+        - ERC721
+    NetworkId:
+      type: number
+      enum:
+        - 1
+        - 4
+        - 80001
+        - 137
+        - 31337
+    NetworkIdString:
+      type: string
+      enum:
+        - '1'
+        - '4'
+        - '80001'
+        - '137'
+        - '31337'
+    ItemStockPhysicalShippingInfoStatus:
+      type: string
+      enum:
+        - 'shipping-address-not-registered'
+        - 'shipping-address-registered'
+        - 'shipped'
+    SignatureType:
+      type: string
+      enum:
+        - ethereum-contract-erc721-shop-fixed-price
+        - ethereum-contract-erc721-shop-auction-bid
+        - ethereum-contract-erc721-shop-auction-withdraw
+    ChainType:
+      type: string
+      enum:
+        - ethereum
+    ItemStockStatus:
+      type: string
+      enum:
+        - created
+        - minted
+    CryptoCurrencyType:
+      type: string
+      enum:
+        - eth
+        - matic
+    PreviewMedia:
+      title: Media
+      description: プレビュー用のメディア
+      type: object
+      properties:
+        url:
+          type: string
+        mimeType:
+          type: string
+      required:
+        - mimeType
+        - url
+    TransferData:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+        transactionHash:
+          type: string
+      required:
+        - from
+        - to
+        - transactionHash
+    UserResidence:
+      type: string
+      enum:
+        - jp
+        - unknown
+    WalletAddressProfile:
+      title: WalletAddressProfile
+      type: object
+      properties:
+        walletAddress:
+          type: string
+        avatarImageId:
+          type: string
+        displayName:
+          type: string
+        bio:
+          type: string
+        twitterAccountName:
+          type: string
+        instagramAccountName:
+          type: string
+        homepageUrl:
+          type: string
+      required:
+        - walletAddress
+        - avatarImageId
+        - displayName
+        - bio
+        - twitterAccountName
+        - instagramAccountName
+        - homepageUrl
+  parameters:
+    AccessToken:
+      in: header
+      name: mint-access-token
+      schema:
+        type: string
+      required: true
+    PerPage:
+      in: query
+      name: perPage
+      schema:
+        type: string
+      required: true
+    Page:
+      in: query
+      name: page
+      schema:
+        type: string
+      required: true
+    SortDirection:
+      in: query
+      name: sortDirection
+      schema:
+        type: string
+        enum:
+          - asc
+          - desc
+    WalletAddress:
+      in: query
+      name: walletAddress
+      schema:
+        type: string
+      required: true
+  responses:
+    Error:
+      description: 'MintAPIサーバーから返される40x,50x系エラーレスポンス'
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+            required:
+              - message
