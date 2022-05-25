@@ -1,0 +1,3496 @@
+openapi: 3.0.0
+info:
+  title: sdk_api
+  version: "4.0"
+servers:
+- url: http://localhost:5500/mint-v2-development/asia-northeast1/
+paths:
+  /sdk_v4/items:
+    get:
+      operationId: GetItems
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: page
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: perPage
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: saleStatus
+        required: false
+        schema:
+          enum:
+          - beforeStart
+          - beforeEnd
+          - afterEnd
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: onlyAvailableStock
+        required: false
+        schema:
+          enum:
+          - "true"
+          - "false"
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: paymentMethod
+        required: false
+        schema:
+          enum:
+          - ethereum-contract-erc721-shop-fixed-price
+          - ethereum-contract-erc721-shop-auction
+          - credit-card-stripe-fixed-price
+          type: string
+        style: form
+      - description: ', 区切りで指定'
+        explode: true
+        in: query
+        name: tags
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          enum:
+          - price
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortDirection
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: プロジェクトのItemを全て取得する
+  /sdk_v4/items/{itemId}:
+    get:
+      operationId: GetItemById
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: itemId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: プロジェクトのItemをId指定で取得する
+  /sdk_v4/items/getSellableItemStockERC721Id:
+    get:
+      operationId: GetSellableItemStockERC721Id
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: itemId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_2'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: スマコンで販売している`Item`の販売可能な(まだ売れていない)`ItemStockId`を取得する
+  /sdk_v4/items/getItemByTokenERC721:
+    get:
+      operationId: GetItemByTokenERC721
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: tokenId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_1'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: get item by tokenERC721 id
+  /sdk_v4/itemStocks/sign:
+    get:
+      operationId: GetSignByItemStockId
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: itemStockId
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: signatureType
+        required: true
+        schema:
+          $ref: '#/components/schemas/SignatureType'
+        style: form
+      - description: 購入時のみ必須
+        explode: true
+        in: query
+        name: walletAddress
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: 購入時のみ必須
+        explode: true
+        in: query
+        name: residence
+        required: false
+        schema:
+          enum:
+          - jp
+          - unknown
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_3'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: Item購入に関してスマコンの操作に必要なSignを返す
+  /sdk_v4/itemStocks/getById:
+    get:
+      operationId: GetItemStockById
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: itemStockId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_4'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: ItemStockをId指定で取得する
+  /sdk_v4/itemStocks/getBiddedItemStocksByWalletAddress:
+    get:
+      operationId: GetBiddedItemStocksByWalletAddress
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: walletAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: perPage
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: onlyBeforeEnd
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          enum:
+          - price
+          - endAt
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortDirection
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_5'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: 指定したwalletAddressでBidしたItemStockを取得する
+  /sdk_v4/itemStocks/getBoughtItemStocksByWalletAddress:
+    get:
+      operationId: GetBoughtItemStocksByWalletAddress
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: walletAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: perPage
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortBy
+        required: false
+        schema:
+          enum:
+          - price
+          - createAt
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sortDirection
+        required: false
+        schema:
+          enum:
+          - asc
+          - desc
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_6'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: 指定したwalletAddressで購入または落札したItemStockを取得する
+  /sdk_v4/itemStockPhysicalShippingInfos/getItemStockPhysicalShippingInfoStatusByItemStockId:
+    get:
+      operationId: GetItemStockPhysicalShippingInfoStatusByItemStockId
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: itemStockId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_7'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: API for getting item stock physical shipping info status by item stock
+        id
+  /sdk_v4/itemStockPhysicalShippingInfos/getItemStockPhysicalShippingInfoByItemStockId:
+    post:
+      operationId: GetItemStockPhysicalShippingInfoByItemStockId
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: itemStockId
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object'
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data'
+                signature:
+                  type: string
+              required:
+              - data
+              - signature
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_8'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: API for getting item stock physical shipping info by item stock id
+  /sdk_v4/itemStockPhysicalShippingInfos/createOrUpdateItemStockPhysicalShippingInfo:
+    post:
+      operationId: CreateOrUpdateItemStockPhysicalShippingInfo
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: itemStockId
+        required: true
+        schema:
+          type: string
+        style: form
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_1'
+        content:
+          application/json:
+            schema:
+              properties:
+                data:
+                  $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_createOrUpdateItemStockPhysicalShippingInfo_data'
+                signature:
+                  type: string
+              required:
+              - data
+              - signature
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_9'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: API for creating or updating item stock physical shipping info for
+        given item stock id
+  /sdk_v4/products/getProductERC721ById:
+    get:
+      operationId: GetProductERC721ById
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_10'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: Itemにパックされていて、ItemのstatusがpublishなProductERC721を取得
+  /sdk_v4/paymentIntents/{paymentIntentId}:
+    get:
+      operationId: GetPaymentIntentById
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: paymentIntentId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_11'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: This API is responsible to get payment intent by its id
+  /sdk_v4/tokens/getTokenERC721sByWalletAddress:
+    get:
+      operationId: GetTokenERC721sByWalletAddress
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: walletAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: perPage
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_12'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: walletAddressに紐づくTokenERC721を全て取得する
+  /sdk_v4/tokens/hasNfts:
+    get:
+      operationId: HasNfts
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: walletAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: contractAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_13'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: has nfts or not in contract
+  /sdk_v4/tokens/hasNft:
+    get:
+      operationId: HasNft
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: walletAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: contractAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: tokenId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_13'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: has token id of nft or not in contract
+  /sdk_v4/tokens/getTokentERC721sByWalletAddressFromAnyContract:
+    get:
+      operationId: GetTokentERC721sByWalletAddressFromAnyContract
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: walletAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: contractAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_12'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: get TokenERC721s by specifying wallet address and contract address
+  /sdk_v4/tokens/{tokenId}:
+    get:
+      operationId: GetTokenERC721ById
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: tokenId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_14'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: get TokenERC721 by Id
+  /sdk_v4/profile:
+    get:
+      description: プロフィールがない場合はnullがdataの値に入る
+      operationId: GetProfile
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: walletAddress
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_15'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: ウォレットに紐づくプロフィールの取得
+    post:
+      operationId: UpdateProfile
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_2'
+        content:
+          application/json:
+            schema:
+              properties:
+                profile:
+                  $ref: '#/components/schemas/WalletAddressProfile'
+                signature:
+                  type: string
+              required:
+              - profile
+              - signature
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_16'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: ウォレットに紐づくプロフィールの作成
+  /sdk_v4/avatar:
+    get:
+      operationId: GetAvatar
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_17'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: アバター画像の署名付きURLの取得
+      tags: []
+  /sdk_v4/contracts/getContractERC721ById:
+    get:
+      operationId: getContractERC721ById
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: true
+        in: query
+        name: contractId
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_18'
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_400'
+          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+      summary: ContractERC721をId指定で取得する
+  /sdk_v4/stripePayment/createStripePaymentIntent:
+    post:
+      operationId: CreateStripePaymentIntent
+      parameters:
+      - explode: false
+        in: header
+        name: mint-access-token
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/inline_object_3'
+        content:
+          application/json:
+            schema:
+              properties:
+                itemId:
+                  description: Item id that will be purchased
+                  type: string
+                toAddress:
+                  description: Buyer wallet address
+                  type: string
+                userResidence:
+                  $ref: '#/components/schemas/UserResidence'
+              required:
+              - itemId
+              - toAddress
+              - userResidence
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/inline_response_200_19'
+          description: OK
+      summary: クレジットカード(Stripe)で指定のアイテムを購入するためのPyamentIntentを作成し、対応するSecretを返す
+components:
+  parameters:
+    AccessToken:
+      explode: false
+      in: header
+      name: mint-access-token
+      required: true
+      schema:
+        type: string
+      style: simple
+    PerPage:
+      explode: true
+      in: query
+      name: perPage
+      required: true
+      schema:
+        type: string
+      style: form
+    Page:
+      explode: true
+      in: query
+      name: page
+      required: true
+      schema:
+        type: string
+      style: form
+    SortDirection:
+      explode: true
+      in: query
+      name: sortDirection
+      required: false
+      schema:
+        enum:
+        - asc
+        - desc
+        type: string
+      style: form
+    WalletAddress:
+      explode: true
+      in: query
+      name: walletAddress
+      required: true
+      schema:
+        type: string
+      style: form
+  requestBodies:
+    inline_object_1:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_1'
+    inline_object:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object'
+    inline_object_3:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_3'
+    inline_object_2:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_object_2'
+  responses:
+    Error:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/inline_response_400'
+      description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+  schemas:
+    Item:
+      example:
+        metadata: '{}'
+        paymentMethodData: ""
+        productERC721Ids:
+        - productERC721Ids
+        - productERC721Ids
+        itemStockIds:
+        - itemStockIds
+        - itemStockIds
+        updateAt: 2000-01-23T04:56:07.000+00:00
+        description: description
+        feeRatePermill: 5.637376656633329
+        endAt: 2000-01-23T04:56:07.000+00:00
+        availableStockNum: 2.3021358869347655
+        createAt: 2000-01-23T04:56:07.000+00:00
+        tags:
+        - tags
+        - tags
+        price: 0.8008281904610115
+        cryptoCurrencyRate:
+          jpy: 6.027456183070403
+          eur: 1.4658129805029452
+          usd: 5.962133916683182
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          createAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        previews:
+        - mimeType: mimeType
+          url: url
+        - mimeType: mimeType
+          url: url
+        bids:
+        - itemDocumentId: itemDocumentId
+          bidder: bidder
+          cryptoCurrencyRate:
+            jpy: 6.027456183070403
+            eur: 1.4658129805029452
+            usd: 5.962133916683182
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            createAt: 2000-01-23T04:56:07.000+00:00
+          transactionAt: 2000-01-23T04:56:07.000+00:00
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+          bidPrice: 7.061401241503109
+          transactionHash: transactionHash
+        - itemDocumentId: itemDocumentId
+          bidder: bidder
+          cryptoCurrencyRate:
+            jpy: 6.027456183070403
+            eur: 1.4658129805029452
+            usd: 5.962133916683182
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            createAt: 2000-01-23T04:56:07.000+00:00
+          transactionAt: 2000-01-23T04:56:07.000+00:00
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+          bidPrice: 7.061401241503109
+          transactionHash: transactionHash
+        id: id
+        startAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        createAt:
+          format: date-time
+          type: string
+        updateAt:
+          format: date-time
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        previews:
+          description: Itemのプレビュー用URL
+          items:
+            $ref: '#/components/schemas/PreviewMedia'
+          type: array
+        type:
+          $ref: '#/components/schemas/ItemType'
+        startAt:
+          format: date-time
+          type: string
+        endAt:
+          format: date-time
+          type: string
+        price:
+          type: number
+        cryptoCurrencyRate:
+          $ref: '#/components/schemas/CryptoCurrencyRate'
+        feeRatePermill:
+          description: Mintに支払われる取引手数料
+          type: number
+        tags:
+          description: 任意のTag
+          items:
+            type: string
+          type: array
+        paymentMethodData:
+          description: paymentMethodによって異なるデータ
+          oneOf:
+          - $ref: '#/components/schemas/ItemPaymentMethodDataEthereumContractERC721ShopFixedPrice'
+          - $ref: '#/components/schemas/ItemPaymentMethodDataEthereumContractERC721ShopAuction'
+          - $ref: '#/components/schemas/ItemPaymentMethodDataCreditCardStripeFixedPrice'
+        itemStockIds:
+          items:
+            type: string
+          type: array
+        availableStockNum:
+          type: number
+        productERC721Ids:
+          items:
+            type: string
+          type: array
+        bids:
+          description: オークションItem以外は空配列が入る
+          items:
+            $ref: '#/components/schemas/Bid'
+          type: array
+        metadata:
+          nullable: true
+          type: object
+      required:
+      - availableStockNum
+      - bids
+      - createAt
+      - cryptoCurrencyRate
+      - description
+      - endAt
+      - feeRatePermill
+      - id
+      - itemStockIds
+      - metadata
+      - name
+      - paymentMethodData
+      - previews
+      - price
+      - productERC721Ids
+      - startAt
+      - tags
+      - type
+      - updateAt
+      type: object
+    ItemStockPhysicalShippingInfo:
+      description: ItemStockPhysicalShippingInfo data model
+      example:
+        lastName: lastName
+        country: country
+        address3: address3
+        city: city
+        address2: address2
+        address1: address1
+        postalCode: postalCode
+        firstName: firstName
+        phoneNumber: phoneNumber
+        id: id
+        state: state
+        email: email
+      properties:
+        id:
+          nullable: true
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        postalCode:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        address1:
+          type: string
+        phoneNumber:
+          type: string
+        address2:
+          nullable: true
+          type: string
+        address3:
+          nullable: true
+          type: string
+        status:
+          $ref: '#/components/schemas/ItemStockPhysicalShippingInfoStatus'
+      required:
+      - address1
+      - address2
+      - address3
+      - city
+      - country
+      - email
+      - firstName
+      - id
+      - lastName
+      - phoneNumber
+      - postalCode
+      - state
+      - status
+      type: object
+    CreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage:
+      description: Request body data model for CreateOrUpdateItemStockPhysicalShippingInfo
+        API
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        country:
+          type: string
+        email:
+          type: string
+        postalCode:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        address1:
+          type: string
+        phoneNumber:
+          type: string
+        address2:
+          nullable: true
+          type: string
+        address3:
+          nullable: true
+          type: string
+        requestTimestamp:
+          pattern: ^\d+$
+          type: string
+      required:
+      - address1
+      - address2
+      - address3
+      - city
+      - country
+      - email
+      - firstName
+      - lastName
+      - phoneNumber
+      - postalCode
+      - requestTimestamp
+      - state
+      type: object
+    GetPaymentIntentByIdResponseBodyData:
+      example:
+        cryptoPaymentIntentId: cryptoPaymentIntentId
+        contractMethodResource:
+          args:
+          - ""
+          - ""
+          contractAddress: contractAddress
+          methodName: methodName
+          abi: abi
+      properties:
+        cryptoPaymentIntentId:
+          type: string
+        contractMethodResource:
+          $ref: '#/components/schemas/GetPaymentIntentByIdResponseBodyData_contractMethodResource'
+      required:
+      - contractMethodResource
+      - cryptoPaymentIntentId
+      type: object
+    SignatureDomain:
+      properties:
+        chainId:
+          $ref: '#/components/schemas/NetworkIdString'
+        name:
+          type: string
+        version:
+          type: string
+      required:
+      - chainId
+      - name
+      - version
+      type: object
+    ItemPaymentMethodDataEthereumContractERC721ShopFixedPrice:
+      properties:
+        paymentMethod:
+          enum:
+          - ethereum-contract-erc721-shop-fixed-price
+          type: string
+        contractDataERC721Shop:
+          $ref: '#/components/schemas/ContractDataERC721Shop'
+      required:
+      - contractDataERC721Shop
+      - paymentMethod
+      type: object
+    ItemPaymentMethodDataEthereumContractERC721ShopAuction:
+      properties:
+        paymentMethod:
+          enum:
+          - ethereum-contract-erc721-shop-auction
+          type: string
+        contractDataERC721Shop:
+          $ref: '#/components/schemas/ContractDataERC721Shop'
+        minBidPercentage:
+          type: number
+        defaultEndAt:
+          format: date-time
+          type: string
+      required:
+      - contractDataERC721Shop
+      - defaultEndAt
+      - minBidPercentage
+      - paymentMethod
+      type: object
+    ItemPaymentMethodDataCreditCardStripeFixedPrice:
+      properties:
+        paymentMethod:
+          enum:
+          - credit-card-stripe-fixed-price
+          type: string
+        currency:
+          $ref: '#/components/schemas/CreditCardStripeCurrencyType'
+      required:
+      - currency
+      - paymentMethod
+      type: object
+    CreditCardStripeCurrencyType:
+      description: Stripeで利用する通貨型
+      enum:
+      - jpy
+      - usd
+      - eur
+      type: string
+    ContractDataERC721Shop:
+      description: ContractERC721またはContractERC721Shopに必要なデータ
+      properties:
+        chainType:
+          $ref: '#/components/schemas/ChainType'
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        contractAddress:
+          type: string
+        abi:
+          description: JSON.stringifyしたもの
+          type: string
+      required:
+      - abi
+      - chainType
+      - contractAddress
+      - networkId
+      type: object
+    ItemStock:
+      example:
+        productsData:
+        - metadata: '{}'
+          tokenId: 0.8008281904610115
+          tokenURI: tokenURI
+          productGroupId: productGroupId
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          contractERC721Id: contractERC721Id
+          creatorAddress: creatorAddress
+          createAt: 2000-01-23T04:56:07.000+00:00
+          itemStockDocumentId: itemStockDocumentId
+          id: id
+          productBlueprintId: productBlueprintId
+          status: created
+        - metadata: '{}'
+          tokenId: 0.8008281904610115
+          tokenURI: tokenURI
+          productGroupId: productGroupId
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          contractERC721Id: contractERC721Id
+          creatorAddress: creatorAddress
+          createAt: 2000-01-23T04:56:07.000+00:00
+          itemStockDocumentId: itemStockDocumentId
+          id: id
+          productBlueprintId: productBlueprintId
+          status: created
+        item:
+          metadata: '{}'
+          paymentMethodData: ""
+          productERC721Ids:
+          - productERC721Ids
+          - productERC721Ids
+          itemStockIds:
+          - itemStockIds
+          - itemStockIds
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          description: description
+          feeRatePermill: 5.637376656633329
+          endAt: 2000-01-23T04:56:07.000+00:00
+          availableStockNum: 2.3021358869347655
+          createAt: 2000-01-23T04:56:07.000+00:00
+          tags:
+          - tags
+          - tags
+          price: 0.8008281904610115
+          cryptoCurrencyRate:
+            jpy: 6.027456183070403
+            eur: 1.4658129805029452
+            usd: 5.962133916683182
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            createAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          previews:
+          - mimeType: mimeType
+            url: url
+          - mimeType: mimeType
+            url: url
+          bids:
+          - itemDocumentId: itemDocumentId
+            bidder: bidder
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            transactionAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+            bidPrice: 7.061401241503109
+            transactionHash: transactionHash
+          - itemDocumentId: itemDocumentId
+            bidder: bidder
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            transactionAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+            bidPrice: 7.061401241503109
+            transactionHash: transactionHash
+          id: id
+          startAt: 2000-01-23T04:56:07.000+00:00
+        updateAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        createAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          type: string
+        createAt:
+          format: date-time
+          type: string
+        updateAt:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/ItemStockStatus'
+        productsData:
+          items:
+            $ref: '#/components/schemas/ProductERC721'
+          type: array
+        item:
+          $ref: '#/components/schemas/Item'
+      required:
+      - createAt
+      - id
+      - item
+      - productsData
+      - status
+      - updateAt
+      type: object
+    ContractERC721:
+      description: ContractERC721のデータ
+      example:
+        address: address
+        name: name
+        updateAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        createAt: 2000-01-23T04:56:07.000+00:00
+        initialDeployBlockNumber: 0.8008281904610115
+      properties:
+        id:
+          type: string
+        createAt:
+          format: date-time
+          type: string
+        updateAt:
+          format: date-time
+          type: string
+        name:
+          type: string
+        chainType:
+          $ref: '#/components/schemas/ChainType'
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        address:
+          type: string
+        initialDeployBlockNumber:
+          type: number
+        tokenStandardType:
+          $ref: '#/components/schemas/TokenStandardType'
+      required:
+      - address
+      - chainType
+      - createAt
+      - id
+      - initialDeployBlockNumber
+      - name
+      - networkId
+      - tokenStandardType
+      - updateAt
+      type: object
+    ProductERC721:
+      example:
+        metadata: '{}'
+        tokenId: 0.8008281904610115
+        tokenURI: tokenURI
+        productGroupId: productGroupId
+        updateAt: 2000-01-23T04:56:07.000+00:00
+        contractERC721Id: contractERC721Id
+        creatorAddress: creatorAddress
+        createAt: 2000-01-23T04:56:07.000+00:00
+        itemStockDocumentId: itemStockDocumentId
+        id: id
+        productBlueprintId: productBlueprintId
+        status: created
+      properties:
+        id:
+          type: string
+        createAt:
+          format: date-time
+          type: string
+        updateAt:
+          format: date-time
+          type: string
+        status:
+          enum:
+          - created
+          - packed-in-item
+          - tx-progressing
+          - minted
+          - archived
+          type: string
+        tokenStandardType:
+          $ref: '#/components/schemas/TokenStandardType'
+        contractERC721Id:
+          type: string
+        tokenId:
+          type: number
+        tokenURI:
+          nullable: true
+          type: string
+        creatorAddress:
+          type: string
+        metadata:
+          nullable: true
+          type: object
+        itemStockDocumentId:
+          nullable: true
+          type: string
+        productBlueprintId:
+          nullable: true
+          type: string
+        productGroupId:
+          nullable: true
+          type: string
+      required:
+      - contractERC721Id
+      - createAt
+      - creatorAddress
+      - id
+      - itemStockDocumentId
+      - metadata
+      - productBlueprintId
+      - productGroupId
+      - status
+      - tokenId
+      - tokenStandardType
+      - tokenURI
+      - updateAt
+      type: object
+    TokenERC721:
+      example:
+        transferHistory:
+        - from: from
+          to: to
+          transactionHash: transactionHash
+        - from: from
+          to: to
+          transactionHash: transactionHash
+        metadata: '{}'
+        tokenId: 0.8008281904610115
+        tokenURI: tokenURI
+        mintTransactionHash: mintTransactionHash
+        currentOwnerAddress: currentOwnerAddress
+        updateAt: 2000-01-23T04:56:07.000+00:00
+        contractERC721Id: contractERC721Id
+        id: id
+        createAt: 2000-01-23T04:56:07.000+00:00
+        initialOwnerAddress: initialOwnerAddress
+      properties:
+        id:
+          type: string
+        createAt:
+          format: date-time
+          type: string
+        updateAt:
+          format: date-time
+          type: string
+        tokenStandardType:
+          $ref: '#/components/schemas/TokenStandardType'
+        contractERC721Id:
+          type: string
+        tokenId:
+          type: number
+        tokenURI:
+          type: string
+        metadata:
+          type: object
+        mintTransactionHash:
+          type: string
+        initialOwnerAddress:
+          type: string
+        currentOwnerAddress:
+          type: string
+        transferHistory:
+          items:
+            $ref: '#/components/schemas/TransferData'
+          type: array
+      required:
+      - contractERC721Id
+      - createAt
+      - currentOwnerAddress
+      - id
+      - initialOwnerAddress
+      - metadata
+      - mintTransactionHash
+      - tokenId
+      - tokenStandardType
+      - tokenURI
+      - transferHistory
+      - updateAt
+      type: object
+    Bid:
+      example:
+        itemDocumentId: itemDocumentId
+        bidder: bidder
+        cryptoCurrencyRate:
+          jpy: 6.027456183070403
+          eur: 1.4658129805029452
+          usd: 5.962133916683182
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          createAt: 2000-01-23T04:56:07.000+00:00
+        transactionAt: 2000-01-23T04:56:07.000+00:00
+        updateAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        createAt: 2000-01-23T04:56:07.000+00:00
+        bidPrice: 7.061401241503109
+        transactionHash: transactionHash
+      properties:
+        id:
+          type: string
+        chainType:
+          $ref: '#/components/schemas/ChainType'
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        createAt:
+          format: date-time
+          type: string
+        updateAt:
+          format: date-time
+          type: string
+        itemDocumentId:
+          type: string
+        bidder:
+          type: string
+        bidPrice:
+          type: number
+        cryptoCurrencyRate:
+          $ref: '#/components/schemas/CryptoCurrencyRate'
+        transactionAt:
+          format: date-time
+          type: string
+        transactionHash:
+          type: string
+      required:
+      - bidPrice
+      - bidder
+      - chainType
+      - createAt
+      - cryptoCurrencyRate
+      - id
+      - itemDocumentId
+      - networkId
+      - transactionAt
+      - transactionHash
+      - updateAt
+      type: object
+    CryptoCurrencyRate:
+      example:
+        jpy: 6.027456183070403
+        eur: 1.4658129805029452
+        usd: 5.962133916683182
+        updateAt: 2000-01-23T04:56:07.000+00:00
+        createAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        createAt:
+          format: date-time
+          type: string
+        updateAt:
+          format: date-time
+          type: string
+        currency:
+          $ref: '#/components/schemas/CryptoCurrencyType'
+        jpy:
+          type: number
+        eur:
+          type: number
+        usd:
+          type: number
+      required:
+      - createAt
+      - currency
+      - eur
+      - jpy
+      - updateAt
+      - usd
+      type: object
+    ItemType:
+      description: アイテムの種類
+      enum:
+      - normal
+      - with-physical-item
+      type: string
+    TokenStandardType:
+      default: ERC721
+      enum:
+      - ERC721
+      type: string
+    NetworkId:
+      enum:
+      - 1
+      - 4
+      - 80001
+      - 137
+      - 31337
+      type: number
+    NetworkIdString:
+      enum:
+      - "1"
+      - "4"
+      - "80001"
+      - "137"
+      - "31337"
+      type: string
+    ItemStockPhysicalShippingInfoStatus:
+      enum:
+      - shipping-address-not-registered
+      - shipping-address-registered
+      - shipped
+      type: string
+    SignatureType:
+      enum:
+      - ethereum-contract-erc721-shop-fixed-price
+      - ethereum-contract-erc721-shop-auction-bid
+      - ethereum-contract-erc721-shop-auction-withdraw
+      type: string
+    ChainType:
+      enum:
+      - ethereum
+      type: string
+    ItemStockStatus:
+      enum:
+      - created
+      - minted
+      type: string
+    CryptoCurrencyType:
+      enum:
+      - eth
+      - matic
+      type: string
+    PreviewMedia:
+      description: プレビュー用のメディア
+      example:
+        mimeType: mimeType
+        url: url
+      properties:
+        url:
+          type: string
+        mimeType:
+          type: string
+      required:
+      - mimeType
+      - url
+      title: Media
+      type: object
+    TransferData:
+      example:
+        from: from
+        to: to
+        transactionHash: transactionHash
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+        transactionHash:
+          type: string
+      required:
+      - from
+      - to
+      - transactionHash
+      type: object
+    UserResidence:
+      enum:
+      - jp
+      - unknown
+      type: string
+    WalletAddressProfile:
+      example:
+        twitterAccountName: twitterAccountName
+        avatarImageId: avatarImageId
+        homepageUrl: homepageUrl
+        displayName: displayName
+        bio: bio
+        walletAddress: walletAddress
+        instagramAccountName: instagramAccountName
+      properties:
+        walletAddress:
+          type: string
+        avatarImageId:
+          type: string
+        displayName:
+          type: string
+        bio:
+          type: string
+        twitterAccountName:
+          type: string
+        instagramAccountName:
+          type: string
+        homepageUrl:
+          type: string
+      required:
+      - avatarImageId
+      - bio
+      - displayName
+      - homepageUrl
+      - instagramAccountName
+      - twitterAccountName
+      - walletAddress
+      title: WalletAddressProfile
+      type: object
+    inline_response_200:
+      example:
+        data:
+        - metadata: '{}'
+          paymentMethodData: ""
+          productERC721Ids:
+          - productERC721Ids
+          - productERC721Ids
+          itemStockIds:
+          - itemStockIds
+          - itemStockIds
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          description: description
+          feeRatePermill: 5.637376656633329
+          endAt: 2000-01-23T04:56:07.000+00:00
+          availableStockNum: 2.3021358869347655
+          createAt: 2000-01-23T04:56:07.000+00:00
+          tags:
+          - tags
+          - tags
+          price: 0.8008281904610115
+          cryptoCurrencyRate:
+            jpy: 6.027456183070403
+            eur: 1.4658129805029452
+            usd: 5.962133916683182
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            createAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          previews:
+          - mimeType: mimeType
+            url: url
+          - mimeType: mimeType
+            url: url
+          bids:
+          - itemDocumentId: itemDocumentId
+            bidder: bidder
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            transactionAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+            bidPrice: 7.061401241503109
+            transactionHash: transactionHash
+          - itemDocumentId: itemDocumentId
+            bidder: bidder
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            transactionAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+            bidPrice: 7.061401241503109
+            transactionHash: transactionHash
+          id: id
+          startAt: 2000-01-23T04:56:07.000+00:00
+        - metadata: '{}'
+          paymentMethodData: ""
+          productERC721Ids:
+          - productERC721Ids
+          - productERC721Ids
+          itemStockIds:
+          - itemStockIds
+          - itemStockIds
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          description: description
+          feeRatePermill: 5.637376656633329
+          endAt: 2000-01-23T04:56:07.000+00:00
+          availableStockNum: 2.3021358869347655
+          createAt: 2000-01-23T04:56:07.000+00:00
+          tags:
+          - tags
+          - tags
+          price: 0.8008281904610115
+          cryptoCurrencyRate:
+            jpy: 6.027456183070403
+            eur: 1.4658129805029452
+            usd: 5.962133916683182
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            createAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          previews:
+          - mimeType: mimeType
+            url: url
+          - mimeType: mimeType
+            url: url
+          bids:
+          - itemDocumentId: itemDocumentId
+            bidder: bidder
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            transactionAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+            bidPrice: 7.061401241503109
+            transactionHash: transactionHash
+          - itemDocumentId: itemDocumentId
+            bidder: bidder
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            transactionAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+            bidPrice: 7.061401241503109
+            transactionHash: transactionHash
+          id: id
+          startAt: 2000-01-23T04:56:07.000+00:00
+        meta: '{}'
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Item'
+          type: array
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_400:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    inline_response_200_1:
+      example:
+        data:
+          metadata: '{}'
+          paymentMethodData: ""
+          productERC721Ids:
+          - productERC721Ids
+          - productERC721Ids
+          itemStockIds:
+          - itemStockIds
+          - itemStockIds
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          description: description
+          feeRatePermill: 5.637376656633329
+          endAt: 2000-01-23T04:56:07.000+00:00
+          availableStockNum: 2.3021358869347655
+          createAt: 2000-01-23T04:56:07.000+00:00
+          tags:
+          - tags
+          - tags
+          price: 0.8008281904610115
+          cryptoCurrencyRate:
+            jpy: 6.027456183070403
+            eur: 1.4658129805029452
+            usd: 5.962133916683182
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            createAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          previews:
+          - mimeType: mimeType
+            url: url
+          - mimeType: mimeType
+            url: url
+          bids:
+          - itemDocumentId: itemDocumentId
+            bidder: bidder
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            transactionAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+            bidPrice: 7.061401241503109
+            transactionHash: transactionHash
+          - itemDocumentId: itemDocumentId
+            bidder: bidder
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            transactionAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+            bidPrice: 7.061401241503109
+            transactionHash: transactionHash
+          id: id
+          startAt: 2000-01-23T04:56:07.000+00:00
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/Item'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_2_data:
+      example:
+        itemStockId: itemStockId
+      properties:
+        itemStockId:
+          type: string
+      required:
+      - itemStockId
+      type: object
+    inline_response_200_2:
+      example:
+        data:
+          itemStockId: itemStockId
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_2_data'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_3_data:
+      example:
+        signature: signature
+        contractMethodArg:
+        - ""
+        - ""
+      properties:
+        signature:
+          type: string
+        contractMethodArg:
+          description: 対応したコントラクトのメソッドに渡す
+          items:
+            anyOf:
+            - type: string
+            - type: number
+            - type: integer
+            - type: boolean
+            - items: {}
+              type: array
+            - type: object
+          type: array
+      required:
+      - contractMethodArg
+      - signature
+      type: object
+    inline_response_200_3:
+      example:
+        data:
+          signature: signature
+          contractMethodArg:
+          - ""
+          - ""
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_3_data'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_4:
+      example:
+        data:
+          productsData:
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          item:
+            metadata: '{}'
+            paymentMethodData: ""
+            productERC721Ids:
+            - productERC721Ids
+            - productERC721Ids
+            itemStockIds:
+            - itemStockIds
+            - itemStockIds
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            description: description
+            feeRatePermill: 5.637376656633329
+            endAt: 2000-01-23T04:56:07.000+00:00
+            availableStockNum: 2.3021358869347655
+            createAt: 2000-01-23T04:56:07.000+00:00
+            tags:
+            - tags
+            - tags
+            price: 0.8008281904610115
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            previews:
+            - mimeType: mimeType
+              url: url
+            - mimeType: mimeType
+              url: url
+            bids:
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            id: id
+            startAt: 2000-01-23T04:56:07.000+00:00
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/ItemStock'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_5:
+      example:
+        data:
+        - productsData:
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          item:
+            metadata: '{}'
+            paymentMethodData: ""
+            productERC721Ids:
+            - productERC721Ids
+            - productERC721Ids
+            itemStockIds:
+            - itemStockIds
+            - itemStockIds
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            description: description
+            feeRatePermill: 5.637376656633329
+            endAt: 2000-01-23T04:56:07.000+00:00
+            availableStockNum: 2.3021358869347655
+            createAt: 2000-01-23T04:56:07.000+00:00
+            tags:
+            - tags
+            - tags
+            price: 0.8008281904610115
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            previews:
+            - mimeType: mimeType
+              url: url
+            - mimeType: mimeType
+              url: url
+            bids:
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            id: id
+            startAt: 2000-01-23T04:56:07.000+00:00
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+        - productsData:
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          item:
+            metadata: '{}'
+            paymentMethodData: ""
+            productERC721Ids:
+            - productERC721Ids
+            - productERC721Ids
+            itemStockIds:
+            - itemStockIds
+            - itemStockIds
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            description: description
+            feeRatePermill: 5.637376656633329
+            endAt: 2000-01-23T04:56:07.000+00:00
+            availableStockNum: 2.3021358869347655
+            createAt: 2000-01-23T04:56:07.000+00:00
+            tags:
+            - tags
+            - tags
+            price: 0.8008281904610115
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            previews:
+            - mimeType: mimeType
+              url: url
+            - mimeType: mimeType
+              url: url
+            bids:
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            id: id
+            startAt: 2000-01-23T04:56:07.000+00:00
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+        meta: '{}'
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ItemStock'
+          type: array
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_6_data:
+      example:
+        itemStocks:
+        - productsData:
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          item:
+            metadata: '{}'
+            paymentMethodData: ""
+            productERC721Ids:
+            - productERC721Ids
+            - productERC721Ids
+            itemStockIds:
+            - itemStockIds
+            - itemStockIds
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            description: description
+            feeRatePermill: 5.637376656633329
+            endAt: 2000-01-23T04:56:07.000+00:00
+            availableStockNum: 2.3021358869347655
+            createAt: 2000-01-23T04:56:07.000+00:00
+            tags:
+            - tags
+            - tags
+            price: 0.8008281904610115
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            previews:
+            - mimeType: mimeType
+              url: url
+            - mimeType: mimeType
+              url: url
+            bids:
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            id: id
+            startAt: 2000-01-23T04:56:07.000+00:00
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+        - productsData:
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          - metadata: '{}'
+            tokenId: 0.8008281904610115
+            tokenURI: tokenURI
+            productGroupId: productGroupId
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            contractERC721Id: contractERC721Id
+            creatorAddress: creatorAddress
+            createAt: 2000-01-23T04:56:07.000+00:00
+            itemStockDocumentId: itemStockDocumentId
+            id: id
+            productBlueprintId: productBlueprintId
+            status: created
+          item:
+            metadata: '{}'
+            paymentMethodData: ""
+            productERC721Ids:
+            - productERC721Ids
+            - productERC721Ids
+            itemStockIds:
+            - itemStockIds
+            - itemStockIds
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            description: description
+            feeRatePermill: 5.637376656633329
+            endAt: 2000-01-23T04:56:07.000+00:00
+            availableStockNum: 2.3021358869347655
+            createAt: 2000-01-23T04:56:07.000+00:00
+            tags:
+            - tags
+            - tags
+            price: 0.8008281904610115
+            cryptoCurrencyRate:
+              jpy: 6.027456183070403
+              eur: 1.4658129805029452
+              usd: 5.962133916683182
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              createAt: 2000-01-23T04:56:07.000+00:00
+            name: name
+            previews:
+            - mimeType: mimeType
+              url: url
+            - mimeType: mimeType
+              url: url
+            bids:
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            - itemDocumentId: itemDocumentId
+              bidder: bidder
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              transactionAt: 2000-01-23T04:56:07.000+00:00
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              id: id
+              createAt: 2000-01-23T04:56:07.000+00:00
+              bidPrice: 7.061401241503109
+              transactionHash: transactionHash
+            id: id
+            startAt: 2000-01-23T04:56:07.000+00:00
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        itemStocks:
+          items:
+            $ref: '#/components/schemas/ItemStock'
+          type: array
+      required:
+      - itemStocks
+      type: object
+    inline_response_200_6:
+      example:
+        data:
+          itemStocks:
+          - productsData:
+            - metadata: '{}'
+              tokenId: 0.8008281904610115
+              tokenURI: tokenURI
+              productGroupId: productGroupId
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              contractERC721Id: contractERC721Id
+              creatorAddress: creatorAddress
+              createAt: 2000-01-23T04:56:07.000+00:00
+              itemStockDocumentId: itemStockDocumentId
+              id: id
+              productBlueprintId: productBlueprintId
+              status: created
+            - metadata: '{}'
+              tokenId: 0.8008281904610115
+              tokenURI: tokenURI
+              productGroupId: productGroupId
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              contractERC721Id: contractERC721Id
+              creatorAddress: creatorAddress
+              createAt: 2000-01-23T04:56:07.000+00:00
+              itemStockDocumentId: itemStockDocumentId
+              id: id
+              productBlueprintId: productBlueprintId
+              status: created
+            item:
+              metadata: '{}'
+              paymentMethodData: ""
+              productERC721Ids:
+              - productERC721Ids
+              - productERC721Ids
+              itemStockIds:
+              - itemStockIds
+              - itemStockIds
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              description: description
+              feeRatePermill: 5.637376656633329
+              endAt: 2000-01-23T04:56:07.000+00:00
+              availableStockNum: 2.3021358869347655
+              createAt: 2000-01-23T04:56:07.000+00:00
+              tags:
+              - tags
+              - tags
+              price: 0.8008281904610115
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              previews:
+              - mimeType: mimeType
+                url: url
+              - mimeType: mimeType
+                url: url
+              bids:
+              - itemDocumentId: itemDocumentId
+                bidder: bidder
+                cryptoCurrencyRate:
+                  jpy: 6.027456183070403
+                  eur: 1.4658129805029452
+                  usd: 5.962133916683182
+                  updateAt: 2000-01-23T04:56:07.000+00:00
+                  createAt: 2000-01-23T04:56:07.000+00:00
+                transactionAt: 2000-01-23T04:56:07.000+00:00
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                id: id
+                createAt: 2000-01-23T04:56:07.000+00:00
+                bidPrice: 7.061401241503109
+                transactionHash: transactionHash
+              - itemDocumentId: itemDocumentId
+                bidder: bidder
+                cryptoCurrencyRate:
+                  jpy: 6.027456183070403
+                  eur: 1.4658129805029452
+                  usd: 5.962133916683182
+                  updateAt: 2000-01-23T04:56:07.000+00:00
+                  createAt: 2000-01-23T04:56:07.000+00:00
+                transactionAt: 2000-01-23T04:56:07.000+00:00
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                id: id
+                createAt: 2000-01-23T04:56:07.000+00:00
+                bidPrice: 7.061401241503109
+                transactionHash: transactionHash
+              id: id
+              startAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+          - productsData:
+            - metadata: '{}'
+              tokenId: 0.8008281904610115
+              tokenURI: tokenURI
+              productGroupId: productGroupId
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              contractERC721Id: contractERC721Id
+              creatorAddress: creatorAddress
+              createAt: 2000-01-23T04:56:07.000+00:00
+              itemStockDocumentId: itemStockDocumentId
+              id: id
+              productBlueprintId: productBlueprintId
+              status: created
+            - metadata: '{}'
+              tokenId: 0.8008281904610115
+              tokenURI: tokenURI
+              productGroupId: productGroupId
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              contractERC721Id: contractERC721Id
+              creatorAddress: creatorAddress
+              createAt: 2000-01-23T04:56:07.000+00:00
+              itemStockDocumentId: itemStockDocumentId
+              id: id
+              productBlueprintId: productBlueprintId
+              status: created
+            item:
+              metadata: '{}'
+              paymentMethodData: ""
+              productERC721Ids:
+              - productERC721Ids
+              - productERC721Ids
+              itemStockIds:
+              - itemStockIds
+              - itemStockIds
+              updateAt: 2000-01-23T04:56:07.000+00:00
+              description: description
+              feeRatePermill: 5.637376656633329
+              endAt: 2000-01-23T04:56:07.000+00:00
+              availableStockNum: 2.3021358869347655
+              createAt: 2000-01-23T04:56:07.000+00:00
+              tags:
+              - tags
+              - tags
+              price: 0.8008281904610115
+              cryptoCurrencyRate:
+                jpy: 6.027456183070403
+                eur: 1.4658129805029452
+                usd: 5.962133916683182
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                createAt: 2000-01-23T04:56:07.000+00:00
+              name: name
+              previews:
+              - mimeType: mimeType
+                url: url
+              - mimeType: mimeType
+                url: url
+              bids:
+              - itemDocumentId: itemDocumentId
+                bidder: bidder
+                cryptoCurrencyRate:
+                  jpy: 6.027456183070403
+                  eur: 1.4658129805029452
+                  usd: 5.962133916683182
+                  updateAt: 2000-01-23T04:56:07.000+00:00
+                  createAt: 2000-01-23T04:56:07.000+00:00
+                transactionAt: 2000-01-23T04:56:07.000+00:00
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                id: id
+                createAt: 2000-01-23T04:56:07.000+00:00
+                bidPrice: 7.061401241503109
+                transactionHash: transactionHash
+              - itemDocumentId: itemDocumentId
+                bidder: bidder
+                cryptoCurrencyRate:
+                  jpy: 6.027456183070403
+                  eur: 1.4658129805029452
+                  usd: 5.962133916683182
+                  updateAt: 2000-01-23T04:56:07.000+00:00
+                  createAt: 2000-01-23T04:56:07.000+00:00
+                transactionAt: 2000-01-23T04:56:07.000+00:00
+                updateAt: 2000-01-23T04:56:07.000+00:00
+                id: id
+                createAt: 2000-01-23T04:56:07.000+00:00
+                bidPrice: 7.061401241503109
+                transactionHash: transactionHash
+              id: id
+              startAt: 2000-01-23T04:56:07.000+00:00
+            updateAt: 2000-01-23T04:56:07.000+00:00
+            id: id
+            createAt: 2000-01-23T04:56:07.000+00:00
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_6_data'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_7:
+      example:
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/ItemStockPhysicalShippingInfoStatus'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    _sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data_message:
+      properties:
+        walletAddress:
+          type: string
+        requestTimestamp:
+          pattern: ^\d+$
+          type: string
+      type: object
+    _sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data:
+      properties:
+        domain:
+          $ref: '#/components/schemas/SignatureDomain'
+        primaryType:
+          type: string
+        message:
+          $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data_message'
+        types:
+          type: object
+      required:
+      - domain
+      - message
+      - primaryType
+      - types
+      type: object
+    inline_object:
+      properties:
+        data:
+          $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data'
+        signature:
+          type: string
+      required:
+      - data
+      - signature
+      type: object
+    inline_response_200_8:
+      example:
+        data:
+          lastName: lastName
+          country: country
+          address3: address3
+          city: city
+          address2: address2
+          address1: address1
+          postalCode: postalCode
+          firstName: firstName
+          phoneNumber: phoneNumber
+          id: id
+          state: state
+          email: email
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/ItemStockPhysicalShippingInfo'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    _sdk_v4_itemStockPhysicalShippingInfos_createOrUpdateItemStockPhysicalShippingInfo_data:
+      properties:
+        domain:
+          $ref: '#/components/schemas/SignatureDomain'
+        primaryType:
+          type: string
+        message:
+          $ref: '#/components/schemas/CreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage'
+        types:
+          type: object
+      required:
+      - domain
+      - message
+      - primaryType
+      - types
+      type: object
+    inline_object_1:
+      properties:
+        data:
+          $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_createOrUpdateItemStockPhysicalShippingInfo_data'
+        signature:
+          type: string
+      required:
+      - data
+      - signature
+      type: object
+    inline_response_200_9:
+      example:
+        data: data
+        meta: '{}'
+      properties:
+        data:
+          type: string
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_10:
+      example:
+        data:
+          metadata: '{}'
+          tokenId: 0.8008281904610115
+          tokenURI: tokenURI
+          productGroupId: productGroupId
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          contractERC721Id: contractERC721Id
+          creatorAddress: creatorAddress
+          createAt: 2000-01-23T04:56:07.000+00:00
+          itemStockDocumentId: itemStockDocumentId
+          id: id
+          productBlueprintId: productBlueprintId
+          status: created
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/ProductERC721'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_11:
+      example:
+        data:
+          cryptoPaymentIntentId: cryptoPaymentIntentId
+          contractMethodResource:
+            args:
+            - ""
+            - ""
+            contractAddress: contractAddress
+            methodName: methodName
+            abi: abi
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/GetPaymentIntentByIdResponseBodyData'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_12:
+      example:
+        data:
+        - transferHistory:
+          - from: from
+            to: to
+            transactionHash: transactionHash
+          - from: from
+            to: to
+            transactionHash: transactionHash
+          metadata: '{}'
+          tokenId: 0.8008281904610115
+          tokenURI: tokenURI
+          mintTransactionHash: mintTransactionHash
+          currentOwnerAddress: currentOwnerAddress
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          contractERC721Id: contractERC721Id
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+          initialOwnerAddress: initialOwnerAddress
+        - transferHistory:
+          - from: from
+            to: to
+            transactionHash: transactionHash
+          - from: from
+            to: to
+            transactionHash: transactionHash
+          metadata: '{}'
+          tokenId: 0.8008281904610115
+          tokenURI: tokenURI
+          mintTransactionHash: mintTransactionHash
+          currentOwnerAddress: currentOwnerAddress
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          contractERC721Id: contractERC721Id
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+          initialOwnerAddress: initialOwnerAddress
+        meta: '{}'
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/TokenERC721'
+          type: array
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_13:
+      example:
+        data: true
+        meta: '{}'
+      properties:
+        data:
+          type: boolean
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_14:
+      example:
+        data:
+          transferHistory:
+          - from: from
+            to: to
+            transactionHash: transactionHash
+          - from: from
+            to: to
+            transactionHash: transactionHash
+          metadata: '{}'
+          tokenId: 0.8008281904610115
+          tokenURI: tokenURI
+          mintTransactionHash: mintTransactionHash
+          currentOwnerAddress: currentOwnerAddress
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          contractERC721Id: contractERC721Id
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+          initialOwnerAddress: initialOwnerAddress
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/TokenERC721'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_response_200_15_data:
+      example:
+        profile:
+          twitterAccountName: twitterAccountName
+          avatarImageId: avatarImageId
+          homepageUrl: homepageUrl
+          displayName: displayName
+          bio: bio
+          walletAddress: walletAddress
+          instagramAccountName: instagramAccountName
+        avatarImageUrl: avatarImageUrl
+      nullable: true
+      properties:
+        profile:
+          $ref: '#/components/schemas/WalletAddressProfile'
+        avatarImageUrl:
+          type: string
+      required:
+      - avatarImageUrl
+      - profile
+      type: object
+    inline_response_200_15:
+      example:
+        data:
+          profile:
+            twitterAccountName: twitterAccountName
+            avatarImageId: avatarImageId
+            homepageUrl: homepageUrl
+            displayName: displayName
+            bio: bio
+            walletAddress: walletAddress
+            instagramAccountName: instagramAccountName
+          avatarImageUrl: avatarImageUrl
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_15_data'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_object_2:
+      properties:
+        profile:
+          $ref: '#/components/schemas/WalletAddressProfile'
+        signature:
+          type: string
+      required:
+      - profile
+      - signature
+      type: object
+    inline_response_200_16_data:
+      example:
+        profile:
+          twitterAccountName: twitterAccountName
+          avatarImageId: avatarImageId
+          homepageUrl: homepageUrl
+          displayName: displayName
+          bio: bio
+          walletAddress: walletAddress
+          instagramAccountName: instagramAccountName
+      properties:
+        profile:
+          $ref: '#/components/schemas/WalletAddressProfile'
+      type: object
+    inline_response_200_16:
+      example:
+        data:
+          profile:
+            twitterAccountName: twitterAccountName
+            avatarImageId: avatarImageId
+            homepageUrl: homepageUrl
+            displayName: displayName
+            bio: bio
+            walletAddress: walletAddress
+            instagramAccountName: instagramAccountName
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/inline_response_200_16_data'
+        meta:
+          type: object
+      type: object
+    inline_response_200_17_data:
+      example:
+        imageId: imageId
+        uploadSignedUrl: uploadSignedUrl
+        readSignedUrl: readSignedUrl
+      properties:
+        imageId:
+          type: string
+        uploadSignedUrl:
+          type: string
+        readSignedUrl:
+          type: string
+      required:
+      - imageId
+      - readSignedUrl
+      - uploadSignedUrl
+      type: object
+    inline_response_200_17:
+      example:
+        data:
+          imageId: imageId
+          uploadSignedUrl: uploadSignedUrl
+          readSignedUrl: readSignedUrl
+        meta: '{}'
+      properties:
+        meta:
+          type: object
+        data:
+          $ref: '#/components/schemas/inline_response_200_17_data'
+      type: object
+    inline_response_200_18:
+      example:
+        data:
+          address: address
+          name: name
+          updateAt: 2000-01-23T04:56:07.000+00:00
+          id: id
+          createAt: 2000-01-23T04:56:07.000+00:00
+          initialDeployBlockNumber: 0.8008281904610115
+        meta: '{}'
+      properties:
+        data:
+          $ref: '#/components/schemas/ContractERC721'
+        meta:
+          type: object
+      required:
+      - data
+      - meta
+      type: object
+    inline_object_3:
+      properties:
+        itemId:
+          description: Item id that will be purchased
+          type: string
+        toAddress:
+          description: Buyer wallet address
+          type: string
+        userResidence:
+          $ref: '#/components/schemas/UserResidence'
+      required:
+      - itemId
+      - toAddress
+      - userResidence
+      type: object
+    inline_response_200_19:
+      example:
+        publishableKey: publishableKey
+        secret: secret
+      properties:
+        publishableKey:
+          description: クライアント側でloadStripeに対して渡す公開可能なAPI-Key
+          type: string
+        secret:
+          description: StripeのPaymentIntentのClientSecret
+          type: string
+      required:
+      - publishableKey
+      - secret
+      type: object
+    GetPaymentIntentByIdResponseBodyData_contractMethodResource:
+      example:
+        args:
+        - ""
+        - ""
+        contractAddress: contractAddress
+        methodName: methodName
+        abi: abi
+      properties:
+        contractAddress:
+          type: string
+        networkId:
+          $ref: '#/components/schemas/NetworkId'
+        chainType:
+          $ref: '#/components/schemas/ChainType'
+        methodName:
+          type: string
+        abi:
+          type: string
+        args:
+          items:
+            oneOf:
+            - type: string
+            - type: number
+            - type: integer
+            - type: boolean
+            - items: {}
+              type: array
+            - type: object
+          type: array
+      required:
+      - abi
+      - args
+      - chainType
+      - contractAddress
+      - methodName
+      - networkId
+      type: object
