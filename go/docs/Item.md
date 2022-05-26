@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **CryptoCurrencyRate** | [**CryptoCurrencyRate**](CryptoCurrencyRate.md) |  | 
 **FeeRatePermill** | **float32** | Mintに支払われる取引手数料 | 
 **Tags** | **[]string** | 任意のTag | 
-**PaymentMethodData** | [**OneOfItemPaymentMethodDataEthereumContractERC721ShopFixedPriceItemPaymentMethodDataEthereumContractERC721ShopAuctionItemPaymentMethodDataCreditCardStripeFixedPrice**](oneOf&lt;ItemPaymentMethodDataEthereumContractERC721ShopFixedPrice,ItemPaymentMethodDataEthereumContractERC721ShopAuction,ItemPaymentMethodDataCreditCardStripeFixedPrice&gt;.md) | paymentMethodによって異なるデータ | 
+**PaymentMethodData** | [**ItemPaymentMethodData**](ItemPaymentMethodData.md) |  | 
 **ItemStockIds** | **[]string** |  | 
 **AvailableStockNum** | **float32** |  | 
 **ProductERC721Ids** | **[]string** |  | 
@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 
 ### NewItem
 
-`func NewItem(id string, createAt time.Time, updateAt time.Time, name string, description string, previews []PreviewMedia, type_ ItemType, startAt time.Time, endAt time.Time, price float32, cryptoCurrencyRate CryptoCurrencyRate, feeRatePermill float32, tags []string, paymentMethodData OneOfItemPaymentMethodDataEthereumContractERC721ShopFixedPriceItemPaymentMethodDataEthereumContractERC721ShopAuctionItemPaymentMethodDataCreditCardStripeFixedPrice, itemStockIds []string, availableStockNum float32, productERC721Ids []string, bids []Bid, metadata map[string]interface{}, ) *Item`
+`func NewItem(id string, createAt time.Time, updateAt time.Time, name string, description string, previews []PreviewMedia, type_ ItemType, startAt time.Time, endAt time.Time, price float32, cryptoCurrencyRate CryptoCurrencyRate, feeRatePermill float32, tags []string, paymentMethodData ItemPaymentMethodData, itemStockIds []string, availableStockNum float32, productERC721Ids []string, bids []Bid, metadata map[string]interface{}, ) *Item`
 
 NewItem instantiates a new Item object
 This constructor will assign default values to properties that have it defined,
@@ -305,20 +305,20 @@ SetTags sets Tags field to given value.
 
 ### GetPaymentMethodData
 
-`func (o *Item) GetPaymentMethodData() OneOfItemPaymentMethodDataEthereumContractERC721ShopFixedPriceItemPaymentMethodDataEthereumContractERC721ShopAuctionItemPaymentMethodDataCreditCardStripeFixedPrice`
+`func (o *Item) GetPaymentMethodData() ItemPaymentMethodData`
 
 GetPaymentMethodData returns the PaymentMethodData field if non-nil, zero value otherwise.
 
 ### GetPaymentMethodDataOk
 
-`func (o *Item) GetPaymentMethodDataOk() (*OneOfItemPaymentMethodDataEthereumContractERC721ShopFixedPriceItemPaymentMethodDataEthereumContractERC721ShopAuctionItemPaymentMethodDataCreditCardStripeFixedPrice, bool)`
+`func (o *Item) GetPaymentMethodDataOk() (*ItemPaymentMethodData, bool)`
 
 GetPaymentMethodDataOk returns a tuple with the PaymentMethodData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentMethodData
 
-`func (o *Item) SetPaymentMethodData(v OneOfItemPaymentMethodDataEthereumContractERC721ShopFixedPriceItemPaymentMethodDataEthereumContractERC721ShopAuctionItemPaymentMethodDataCreditCardStripeFixedPrice)`
+`func (o *Item) SetPaymentMethodData(v ItemPaymentMethodData)`
 
 SetPaymentMethodData sets PaymentMethodData field to given value.
 

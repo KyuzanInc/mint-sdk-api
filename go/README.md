@@ -22,7 +22,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```golang
-import sw "./openapi"
+import openapi "github.com/KyuzanInc/mint-sdk-api/go"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
@@ -40,7 +40,7 @@ Default configuration comes with `Servers` field that contains server objects as
 For using other server than the one defined on index 0 set context value `sw.ContextServerIndex` of type `int`.
 
 ```golang
-ctx := context.WithValue(context.Background(), sw.ContextServerIndex, 1)
+ctx := context.WithValue(context.Background(), openapi.ContextServerIndex, 1)
 ```
 
 ### Templated Server URL
@@ -48,7 +48,7 @@ ctx := context.WithValue(context.Background(), sw.ContextServerIndex, 1)
 Templated server URL is formatted using default variables from configuration or from context value `sw.ContextServerVariables` of type `map[string]string`.
 
 ```golang
-ctx := context.WithValue(context.Background(), sw.ContextServerVariables, map[string]string{
+ctx := context.WithValue(context.Background(), openapi.ContextServerVariables, map[string]string{
 	"basePath": "v2",
 })
 ```
@@ -58,14 +58,14 @@ Note, enum values are always validated and all unused variables are silently ign
 ### URLs Configuration per Operation
 
 Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
-An operation is uniquely identifield by `"{classname}Service.{nickname}"` string.
+An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```
-ctx := context.WithValue(context.Background(), sw.ContextOperationServerIndices, map[string]int{
+ctx := context.WithValue(context.Background(), openapi.ContextOperationServerIndices, map[string]int{
 	"{classname}Service.{nickname}": 2,
 })
-ctx = context.WithValue(context.Background(), sw.ContextOperationServerVariables, map[string]map[string]string{
+ctx = context.WithValue(context.Background(), openapi.ContextOperationServerVariables, map[string]map[string]string{
 	"{classname}Service.{nickname}": {
 		"port": "8443",
 	},
@@ -105,48 +105,50 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [AnyOfAny](docs/AnyOfAny.md)
  - [Bid](docs/Bid.md)
  - [ChainType](docs/ChainType.md)
  - [ContractDataERC721Shop](docs/ContractDataERC721Shop.md)
  - [ContractERC721](docs/ContractERC721.md)
+ - [CreateOrUpdateItemStockPhysicalShippingInfo200Response](docs/CreateOrUpdateItemStockPhysicalShippingInfo200Response.md)
+ - [CreateOrUpdateItemStockPhysicalShippingInfoRequest](docs/CreateOrUpdateItemStockPhysicalShippingInfoRequest.md)
  - [CreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage](docs/CreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage.md)
+ - [CreateOrUpdateItemStockPhysicalShippingInfoRequestData](docs/CreateOrUpdateItemStockPhysicalShippingInfoRequestData.md)
+ - [CreateStripePaymentIntent200Response](docs/CreateStripePaymentIntent200Response.md)
+ - [CreateStripePaymentIntentRequest](docs/CreateStripePaymentIntentRequest.md)
  - [CreditCardStripeCurrencyType](docs/CreditCardStripeCurrencyType.md)
  - [CryptoCurrencyRate](docs/CryptoCurrencyRate.md)
  - [CryptoCurrencyType](docs/CryptoCurrencyType.md)
+ - [GetAvatar200Response](docs/GetAvatar200Response.md)
+ - [GetAvatar200ResponseData](docs/GetAvatar200ResponseData.md)
+ - [GetBiddedItemStocksByWalletAddress200Response](docs/GetBiddedItemStocksByWalletAddress200Response.md)
+ - [GetBoughtItemStocksByWalletAddress200Response](docs/GetBoughtItemStocksByWalletAddress200Response.md)
+ - [GetBoughtItemStocksByWalletAddress200ResponseData](docs/GetBoughtItemStocksByWalletAddress200ResponseData.md)
+ - [GetContractERC721ById200Response](docs/GetContractERC721ById200Response.md)
+ - [GetItemById200Response](docs/GetItemById200Response.md)
+ - [GetItemStockById200Response](docs/GetItemStockById200Response.md)
+ - [GetItemStockPhysicalShippingInfoByItemStockId200Response](docs/GetItemStockPhysicalShippingInfoByItemStockId200Response.md)
+ - [GetItemStockPhysicalShippingInfoByItemStockIdRequest](docs/GetItemStockPhysicalShippingInfoByItemStockIdRequest.md)
+ - [GetItemStockPhysicalShippingInfoByItemStockIdRequestData](docs/GetItemStockPhysicalShippingInfoByItemStockIdRequestData.md)
+ - [GetItemStockPhysicalShippingInfoByItemStockIdRequestDataMessage](docs/GetItemStockPhysicalShippingInfoByItemStockIdRequestDataMessage.md)
+ - [GetItemStockPhysicalShippingInfoStatusByItemStockId200Response](docs/GetItemStockPhysicalShippingInfoStatusByItemStockId200Response.md)
+ - [GetItems200Response](docs/GetItems200Response.md)
+ - [GetItems400Response](docs/GetItems400Response.md)
+ - [GetPaymentIntentById200Response](docs/GetPaymentIntentById200Response.md)
  - [GetPaymentIntentByIdResponseBodyData](docs/GetPaymentIntentByIdResponseBodyData.md)
  - [GetPaymentIntentByIdResponseBodyDataContractMethodResource](docs/GetPaymentIntentByIdResponseBodyDataContractMethodResource.md)
- - [InlineObject](docs/InlineObject.md)
- - [InlineObject1](docs/InlineObject1.md)
- - [InlineObject2](docs/InlineObject2.md)
- - [InlineObject3](docs/InlineObject3.md)
- - [InlineResponse200](docs/InlineResponse200.md)
- - [InlineResponse2001](docs/InlineResponse2001.md)
- - [InlineResponse20010](docs/InlineResponse20010.md)
- - [InlineResponse20011](docs/InlineResponse20011.md)
- - [InlineResponse20012](docs/InlineResponse20012.md)
- - [InlineResponse20013](docs/InlineResponse20013.md)
- - [InlineResponse20014](docs/InlineResponse20014.md)
- - [InlineResponse20015](docs/InlineResponse20015.md)
- - [InlineResponse20015Data](docs/InlineResponse20015Data.md)
- - [InlineResponse20016](docs/InlineResponse20016.md)
- - [InlineResponse20016Data](docs/InlineResponse20016Data.md)
- - [InlineResponse20017](docs/InlineResponse20017.md)
- - [InlineResponse20017Data](docs/InlineResponse20017Data.md)
- - [InlineResponse20018](docs/InlineResponse20018.md)
- - [InlineResponse20019](docs/InlineResponse20019.md)
- - [InlineResponse2002](docs/InlineResponse2002.md)
- - [InlineResponse2002Data](docs/InlineResponse2002Data.md)
- - [InlineResponse2003](docs/InlineResponse2003.md)
- - [InlineResponse2003Data](docs/InlineResponse2003Data.md)
- - [InlineResponse2004](docs/InlineResponse2004.md)
- - [InlineResponse2005](docs/InlineResponse2005.md)
- - [InlineResponse2006](docs/InlineResponse2006.md)
- - [InlineResponse2006Data](docs/InlineResponse2006Data.md)
- - [InlineResponse2007](docs/InlineResponse2007.md)
- - [InlineResponse2008](docs/InlineResponse2008.md)
- - [InlineResponse2009](docs/InlineResponse2009.md)
- - [InlineResponse400](docs/InlineResponse400.md)
+ - [GetProductERC721ById200Response](docs/GetProductERC721ById200Response.md)
+ - [GetProfile200Response](docs/GetProfile200Response.md)
+ - [GetProfile200ResponseData](docs/GetProfile200ResponseData.md)
+ - [GetSellableItemStockERC721Id200Response](docs/GetSellableItemStockERC721Id200Response.md)
+ - [GetSellableItemStockERC721Id200ResponseData](docs/GetSellableItemStockERC721Id200ResponseData.md)
+ - [GetSignByItemStockId200Response](docs/GetSignByItemStockId200Response.md)
+ - [GetSignByItemStockId200ResponseData](docs/GetSignByItemStockId200ResponseData.md)
+ - [GetTokenERC721ById200Response](docs/GetTokenERC721ById200Response.md)
+ - [GetTokenERC721sByWalletAddress200Response](docs/GetTokenERC721sByWalletAddress200Response.md)
+ - [HasNfts200Response](docs/HasNfts200Response.md)
  - [Item](docs/Item.md)
+ - [ItemPaymentMethodData](docs/ItemPaymentMethodData.md)
  - [ItemPaymentMethodDataCreditCardStripeFixedPrice](docs/ItemPaymentMethodDataCreditCardStripeFixedPrice.md)
  - [ItemPaymentMethodDataEthereumContractERC721ShopAuction](docs/ItemPaymentMethodDataEthereumContractERC721ShopAuction.md)
  - [ItemPaymentMethodDataEthereumContractERC721ShopFixedPrice](docs/ItemPaymentMethodDataEthereumContractERC721ShopFixedPrice.md)
@@ -157,16 +159,17 @@ Class | Method | HTTP request | Description
  - [ItemType](docs/ItemType.md)
  - [NetworkId](docs/NetworkId.md)
  - [NetworkIdString](docs/NetworkIdString.md)
+ - [OneOfAny](docs/OneOfAny.md)
  - [PreviewMedia](docs/PreviewMedia.md)
  - [ProductERC721](docs/ProductERC721.md)
- - [SdkV4ItemStockPhysicalShippingInfosCreateOrUpdateItemStockPhysicalShippingInfoData](docs/SdkV4ItemStockPhysicalShippingInfosCreateOrUpdateItemStockPhysicalShippingInfoData.md)
- - [SdkV4ItemStockPhysicalShippingInfosGetItemStockPhysicalShippingInfoByItemStockIdData](docs/SdkV4ItemStockPhysicalShippingInfosGetItemStockPhysicalShippingInfoByItemStockIdData.md)
- - [SdkV4ItemStockPhysicalShippingInfosGetItemStockPhysicalShippingInfoByItemStockIdDataMessage](docs/SdkV4ItemStockPhysicalShippingInfosGetItemStockPhysicalShippingInfoByItemStockIdDataMessage.md)
  - [SignatureDomain](docs/SignatureDomain.md)
  - [SignatureType](docs/SignatureType.md)
  - [TokenERC721](docs/TokenERC721.md)
  - [TokenStandardType](docs/TokenStandardType.md)
  - [TransferData](docs/TransferData.md)
+ - [UpdateProfile200Response](docs/UpdateProfile200Response.md)
+ - [UpdateProfile200ResponseData](docs/UpdateProfile200ResponseData.md)
+ - [UpdateProfileRequest](docs/UpdateProfileRequest.md)
  - [UserResidence](docs/UserResidence.md)
  - [WalletAddressProfile](docs/WalletAddressProfile.md)
 

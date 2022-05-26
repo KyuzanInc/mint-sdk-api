@@ -32,7 +32,7 @@ Method | HTTP request | Description
 
 ## CreateOrUpdateItemStockPhysicalShippingInfo
 
-> InlineResponse2009 CreateOrUpdateItemStockPhysicalShippingInfo(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).InlineObject1(inlineObject1).Execute()
+> CreateOrUpdateItemStockPhysicalShippingInfo200Response CreateOrUpdateItemStockPhysicalShippingInfo(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).CreateOrUpdateItemStockPhysicalShippingInfoRequest(createOrUpdateItemStockPhysicalShippingInfoRequest).Execute()
 
 API for creating or updating item stock physical shipping info for given item stock id
 
@@ -51,16 +51,16 @@ import (
 func main() {
     mintAccessToken := "mintAccessToken_example" // string | 
     itemStockId := "itemStockId_example" // string | 
-    inlineObject1 := *openapiclient.NewInlineObject1(*openapiclient.NewSdkV4ItemStockPhysicalShippingInfosCreateOrUpdateItemStockPhysicalShippingInfoData(*openapiclient.NewSignatureDomain(openapiclient.NetworkIdString("1"), "Name_example", "Version_example"), "PrimaryType_example", *openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage("FirstName_example", "LastName_example", "Country_example", "Email_example", "PostalCode_example", "City_example", "State_example", "Address1_example", "PhoneNumber_example", "Address2_example", "Address3_example", "RequestTimestamp_example"), map[string]interface{}(123)), "Signature_example") // InlineObject1 |  (optional)
+    createOrUpdateItemStockPhysicalShippingInfoRequest := *openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequest(*openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequestData(*openapiclient.NewSignatureDomain(openapiclient.NetworkIdString("1"), "Name_example", "Version_example"), "PrimaryType_example", *openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage("FirstName_example", "LastName_example", "Country_example", "Email_example", "PostalCode_example", "City_example", "State_example", "Address1_example", "PhoneNumber_example", "Address2_example", "Address3_example", "RequestTimestamp_example"), map[string]interface{}(123)), "Signature_example") // CreateOrUpdateItemStockPhysicalShippingInfoRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.CreateOrUpdateItemStockPhysicalShippingInfo(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).InlineObject1(inlineObject1).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.CreateOrUpdateItemStockPhysicalShippingInfo(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).CreateOrUpdateItemStockPhysicalShippingInfoRequest(createOrUpdateItemStockPhysicalShippingInfoRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.CreateOrUpdateItemStockPhysicalShippingInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateOrUpdateItemStockPhysicalShippingInfo`: InlineResponse2009
+    // response from `CreateOrUpdateItemStockPhysicalShippingInfo`: CreateOrUpdateItemStockPhysicalShippingInfo200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.CreateOrUpdateItemStockPhysicalShippingInfo`: %v\n", resp)
 }
 ```
@@ -78,11 +78,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **mintAccessToken** | **string** |  | 
  **itemStockId** | **string** |  | 
- **inlineObject1** | [**InlineObject1**](InlineObject1.md) |  | 
+ **createOrUpdateItemStockPhysicalShippingInfoRequest** | [**CreateOrUpdateItemStockPhysicalShippingInfoRequest**](CreateOrUpdateItemStockPhysicalShippingInfoRequest.md) |  | 
 
 ### Return type
 
-[**InlineResponse2009**](InlineResponse2009.md)
+[**CreateOrUpdateItemStockPhysicalShippingInfo200Response**](CreateOrUpdateItemStockPhysicalShippingInfo200Response.md)
 
 ### Authorization
 
@@ -100,7 +100,7 @@ No authorization required
 
 ## CreateStripePaymentIntent
 
-> InlineResponse20019 CreateStripePaymentIntent(ctx).MintAccessToken(mintAccessToken).InlineObject3(inlineObject3).Execute()
+> CreateStripePaymentIntent200Response CreateStripePaymentIntent(ctx).MintAccessToken(mintAccessToken).CreateStripePaymentIntentRequest(createStripePaymentIntentRequest).Execute()
 
 クレジットカード(Stripe)で指定のアイテムを購入するためのPyamentIntentを作成し、対応するSecretを返す
 
@@ -118,16 +118,16 @@ import (
 
 func main() {
     mintAccessToken := "mintAccessToken_example" // string | 
-    inlineObject3 := *openapiclient.NewInlineObject3("ItemId_example", "ToAddress_example", openapiclient.UserResidence("jp")) // InlineObject3 |  (optional)
+    createStripePaymentIntentRequest := *openapiclient.NewCreateStripePaymentIntentRequest("ItemId_example", "ToAddress_example", openapiclient.UserResidence("jp")) // CreateStripePaymentIntentRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.CreateStripePaymentIntent(context.Background()).MintAccessToken(mintAccessToken).InlineObject3(inlineObject3).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.CreateStripePaymentIntent(context.Background()).MintAccessToken(mintAccessToken).CreateStripePaymentIntentRequest(createStripePaymentIntentRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.CreateStripePaymentIntent``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `CreateStripePaymentIntent`: InlineResponse20019
+    // response from `CreateStripePaymentIntent`: CreateStripePaymentIntent200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.CreateStripePaymentIntent`: %v\n", resp)
 }
 ```
@@ -144,11 +144,11 @@ Other parameters are passed through a pointer to a apiCreateStripePaymentIntentR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **mintAccessToken** | **string** |  | 
- **inlineObject3** | [**InlineObject3**](InlineObject3.md) |  | 
+ **createStripePaymentIntentRequest** | [**CreateStripePaymentIntentRequest**](CreateStripePaymentIntentRequest.md) |  | 
 
 ### Return type
 
-[**InlineResponse20019**](InlineResponse20019.md)
+[**CreateStripePaymentIntent200Response**](CreateStripePaymentIntent200Response.md)
 
 ### Authorization
 
@@ -166,7 +166,7 @@ No authorization required
 
 ## GetAvatar
 
-> InlineResponse20017 GetAvatar(ctx).MintAccessToken(mintAccessToken).Execute()
+> GetAvatar200Response GetAvatar(ctx).MintAccessToken(mintAccessToken).Execute()
 
 アバター画像の署名付きURLの取得
 
@@ -186,13 +186,13 @@ func main() {
     mintAccessToken := "mintAccessToken_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetAvatar(context.Background()).MintAccessToken(mintAccessToken).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetAvatar(context.Background()).MintAccessToken(mintAccessToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetAvatar``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetAvatar`: InlineResponse20017
+    // response from `GetAvatar`: GetAvatar200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetAvatar`: %v\n", resp)
 }
 ```
@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20017**](InlineResponse20017.md)
+[**GetAvatar200Response**](GetAvatar200Response.md)
 
 ### Authorization
 
@@ -230,7 +230,7 @@ No authorization required
 
 ## GetBiddedItemStocksByWalletAddress
 
-> InlineResponse2005 GetBiddedItemStocksByWalletAddress(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).OnlyBeforeEnd(onlyBeforeEnd).SortBy(sortBy).SortDirection(sortDirection).Execute()
+> GetBiddedItemStocksByWalletAddress200Response GetBiddedItemStocksByWalletAddress(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).OnlyBeforeEnd(onlyBeforeEnd).SortBy(sortBy).SortDirection(sortDirection).Execute()
 
 指定したwalletAddressでBidしたItemStockを取得する
 
@@ -256,13 +256,13 @@ func main() {
     sortDirection := "sortDirection_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetBiddedItemStocksByWalletAddress(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).OnlyBeforeEnd(onlyBeforeEnd).SortBy(sortBy).SortDirection(sortDirection).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetBiddedItemStocksByWalletAddress(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).OnlyBeforeEnd(onlyBeforeEnd).SortBy(sortBy).SortDirection(sortDirection).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetBiddedItemStocksByWalletAddress``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetBiddedItemStocksByWalletAddress`: InlineResponse2005
+    // response from `GetBiddedItemStocksByWalletAddress`: GetBiddedItemStocksByWalletAddress200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetBiddedItemStocksByWalletAddress`: %v\n", resp)
 }
 ```
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2005**](InlineResponse2005.md)
+[**GetBiddedItemStocksByWalletAddress200Response**](GetBiddedItemStocksByWalletAddress200Response.md)
 
 ### Authorization
 
@@ -306,7 +306,7 @@ No authorization required
 
 ## GetBoughtItemStocksByWalletAddress
 
-> InlineResponse2006 GetBoughtItemStocksByWalletAddress(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).SortBy(sortBy).SortDirection(sortDirection).Execute()
+> GetBoughtItemStocksByWalletAddress200Response GetBoughtItemStocksByWalletAddress(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).SortBy(sortBy).SortDirection(sortDirection).Execute()
 
 指定したwalletAddressで購入または落札したItemStockを取得する
 
@@ -331,13 +331,13 @@ func main() {
     sortDirection := "sortDirection_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetBoughtItemStocksByWalletAddress(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).SortBy(sortBy).SortDirection(sortDirection).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetBoughtItemStocksByWalletAddress(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).SortBy(sortBy).SortDirection(sortDirection).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetBoughtItemStocksByWalletAddress``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetBoughtItemStocksByWalletAddress`: InlineResponse2006
+    // response from `GetBoughtItemStocksByWalletAddress`: GetBoughtItemStocksByWalletAddress200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetBoughtItemStocksByWalletAddress`: %v\n", resp)
 }
 ```
@@ -362,7 +362,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2006**](InlineResponse2006.md)
+[**GetBoughtItemStocksByWalletAddress200Response**](GetBoughtItemStocksByWalletAddress200Response.md)
 
 ### Authorization
 
@@ -380,7 +380,7 @@ No authorization required
 
 ## GetContractERC721ById
 
-> InlineResponse20018 GetContractERC721ById(ctx).MintAccessToken(mintAccessToken).ContractId(contractId).Execute()
+> GetContractERC721ById200Response GetContractERC721ById(ctx).MintAccessToken(mintAccessToken).ContractId(contractId).Execute()
 
 ContractERC721をId指定で取得する
 
@@ -401,13 +401,13 @@ func main() {
     contractId := "contractId_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetContractERC721ById(context.Background()).MintAccessToken(mintAccessToken).ContractId(contractId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetContractERC721ById(context.Background()).MintAccessToken(mintAccessToken).ContractId(contractId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetContractERC721ById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetContractERC721ById`: InlineResponse20018
+    // response from `GetContractERC721ById`: GetContractERC721ById200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetContractERC721ById`: %v\n", resp)
 }
 ```
@@ -428,7 +428,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20018**](InlineResponse20018.md)
+[**GetContractERC721ById200Response**](GetContractERC721ById200Response.md)
 
 ### Authorization
 
@@ -446,7 +446,7 @@ No authorization required
 
 ## GetItemById
 
-> InlineResponse2001 GetItemById(ctx, itemId).MintAccessToken(mintAccessToken).Execute()
+> GetItemById200Response GetItemById(ctx, itemId).MintAccessToken(mintAccessToken).Execute()
 
 プロジェクトのItemをId指定で取得する
 
@@ -467,13 +467,13 @@ func main() {
     itemId := "itemId_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetItemById(context.Background(), itemId).MintAccessToken(mintAccessToken).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetItemById(context.Background(), itemId).MintAccessToken(mintAccessToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetItemById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetItemById`: InlineResponse2001
+    // response from `GetItemById`: GetItemById200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetItemById`: %v\n", resp)
 }
 ```
@@ -498,7 +498,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**GetItemById200Response**](GetItemById200Response.md)
 
 ### Authorization
 
@@ -516,7 +516,7 @@ No authorization required
 
 ## GetItemByTokenERC721
 
-> InlineResponse2001 GetItemByTokenERC721(ctx).MintAccessToken(mintAccessToken).TokenId(tokenId).Execute()
+> GetItemById200Response GetItemByTokenERC721(ctx).MintAccessToken(mintAccessToken).TokenId(tokenId).Execute()
 
 get item by tokenERC721 id
 
@@ -537,13 +537,13 @@ func main() {
     tokenId := "tokenId_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetItemByTokenERC721(context.Background()).MintAccessToken(mintAccessToken).TokenId(tokenId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetItemByTokenERC721(context.Background()).MintAccessToken(mintAccessToken).TokenId(tokenId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetItemByTokenERC721``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetItemByTokenERC721`: InlineResponse2001
+    // response from `GetItemByTokenERC721`: GetItemById200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetItemByTokenERC721`: %v\n", resp)
 }
 ```
@@ -564,7 +564,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2001**](InlineResponse2001.md)
+[**GetItemById200Response**](GetItemById200Response.md)
 
 ### Authorization
 
@@ -582,7 +582,7 @@ No authorization required
 
 ## GetItemStockById
 
-> InlineResponse2004 GetItemStockById(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).Execute()
+> GetItemStockById200Response GetItemStockById(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).Execute()
 
 ItemStockをId指定で取得する
 
@@ -603,13 +603,13 @@ func main() {
     itemStockId := "itemStockId_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetItemStockById(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetItemStockById(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetItemStockById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetItemStockById`: InlineResponse2004
+    // response from `GetItemStockById`: GetItemStockById200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetItemStockById`: %v\n", resp)
 }
 ```
@@ -630,7 +630,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2004**](InlineResponse2004.md)
+[**GetItemStockById200Response**](GetItemStockById200Response.md)
 
 ### Authorization
 
@@ -648,7 +648,7 @@ No authorization required
 
 ## GetItemStockPhysicalShippingInfoByItemStockId
 
-> InlineResponse2008 GetItemStockPhysicalShippingInfoByItemStockId(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).InlineObject(inlineObject).Execute()
+> GetItemStockPhysicalShippingInfoByItemStockId200Response GetItemStockPhysicalShippingInfoByItemStockId(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).GetItemStockPhysicalShippingInfoByItemStockIdRequest(getItemStockPhysicalShippingInfoByItemStockIdRequest).Execute()
 
 API for getting item stock physical shipping info by item stock id
 
@@ -667,16 +667,16 @@ import (
 func main() {
     mintAccessToken := "mintAccessToken_example" // string | 
     itemStockId := "itemStockId_example" // string | 
-    inlineObject := *openapiclient.NewInlineObject(*openapiclient.NewSdkV4ItemStockPhysicalShippingInfosGetItemStockPhysicalShippingInfoByItemStockIdData(*openapiclient.NewSignatureDomain(openapiclient.NetworkIdString("1"), "Name_example", "Version_example"), "PrimaryType_example", *openapiclient.NewSdkV4ItemStockPhysicalShippingInfosGetItemStockPhysicalShippingInfoByItemStockIdDataMessage(), map[string]interface{}(123)), "Signature_example") // InlineObject |  (optional)
+    getItemStockPhysicalShippingInfoByItemStockIdRequest := *openapiclient.NewGetItemStockPhysicalShippingInfoByItemStockIdRequest(*openapiclient.NewGetItemStockPhysicalShippingInfoByItemStockIdRequestData(*openapiclient.NewSignatureDomain(openapiclient.NetworkIdString("1"), "Name_example", "Version_example"), "PrimaryType_example", *openapiclient.NewGetItemStockPhysicalShippingInfoByItemStockIdRequestDataMessage(), map[string]interface{}(123)), "Signature_example") // GetItemStockPhysicalShippingInfoByItemStockIdRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetItemStockPhysicalShippingInfoByItemStockId(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).InlineObject(inlineObject).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetItemStockPhysicalShippingInfoByItemStockId(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).GetItemStockPhysicalShippingInfoByItemStockIdRequest(getItemStockPhysicalShippingInfoByItemStockIdRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetItemStockPhysicalShippingInfoByItemStockId``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetItemStockPhysicalShippingInfoByItemStockId`: InlineResponse2008
+    // response from `GetItemStockPhysicalShippingInfoByItemStockId`: GetItemStockPhysicalShippingInfoByItemStockId200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetItemStockPhysicalShippingInfoByItemStockId`: %v\n", resp)
 }
 ```
@@ -694,11 +694,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **mintAccessToken** | **string** |  | 
  **itemStockId** | **string** |  | 
- **inlineObject** | [**InlineObject**](InlineObject.md) |  | 
+ **getItemStockPhysicalShippingInfoByItemStockIdRequest** | [**GetItemStockPhysicalShippingInfoByItemStockIdRequest**](GetItemStockPhysicalShippingInfoByItemStockIdRequest.md) |  | 
 
 ### Return type
 
-[**InlineResponse2008**](InlineResponse2008.md)
+[**GetItemStockPhysicalShippingInfoByItemStockId200Response**](GetItemStockPhysicalShippingInfoByItemStockId200Response.md)
 
 ### Authorization
 
@@ -716,7 +716,7 @@ No authorization required
 
 ## GetItemStockPhysicalShippingInfoStatusByItemStockId
 
-> InlineResponse2007 GetItemStockPhysicalShippingInfoStatusByItemStockId(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).Execute()
+> GetItemStockPhysicalShippingInfoStatusByItemStockId200Response GetItemStockPhysicalShippingInfoStatusByItemStockId(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).Execute()
 
 API for getting item stock physical shipping info status by item stock id
 
@@ -737,13 +737,13 @@ func main() {
     itemStockId := "itemStockId_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetItemStockPhysicalShippingInfoStatusByItemStockId(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetItemStockPhysicalShippingInfoStatusByItemStockId(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetItemStockPhysicalShippingInfoStatusByItemStockId``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetItemStockPhysicalShippingInfoStatusByItemStockId`: InlineResponse2007
+    // response from `GetItemStockPhysicalShippingInfoStatusByItemStockId`: GetItemStockPhysicalShippingInfoStatusByItemStockId200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetItemStockPhysicalShippingInfoStatusByItemStockId`: %v\n", resp)
 }
 ```
@@ -764,7 +764,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2007**](InlineResponse2007.md)
+[**GetItemStockPhysicalShippingInfoStatusByItemStockId200Response**](GetItemStockPhysicalShippingInfoStatusByItemStockId200Response.md)
 
 ### Authorization
 
@@ -782,7 +782,7 @@ No authorization required
 
 ## GetItems
 
-> InlineResponse200 GetItems(ctx).MintAccessToken(mintAccessToken).Page(page).PerPage(perPage).SaleStatus(saleStatus).OnlyAvailableStock(onlyAvailableStock).PaymentMethod(paymentMethod).Tags(tags).SortBy(sortBy).SortDirection(sortDirection).Execute()
+> GetItems200Response GetItems(ctx).MintAccessToken(mintAccessToken).Page(page).PerPage(perPage).SaleStatus(saleStatus).OnlyAvailableStock(onlyAvailableStock).PaymentMethod(paymentMethod).Tags(tags).SortBy(sortBy).SortDirection(sortDirection).Execute()
 
 プロジェクトのItemを全て取得する
 
@@ -810,13 +810,13 @@ func main() {
     sortDirection := "sortDirection_example" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetItems(context.Background()).MintAccessToken(mintAccessToken).Page(page).PerPage(perPage).SaleStatus(saleStatus).OnlyAvailableStock(onlyAvailableStock).PaymentMethod(paymentMethod).Tags(tags).SortBy(sortBy).SortDirection(sortDirection).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetItems(context.Background()).MintAccessToken(mintAccessToken).Page(page).PerPage(perPage).SaleStatus(saleStatus).OnlyAvailableStock(onlyAvailableStock).PaymentMethod(paymentMethod).Tags(tags).SortBy(sortBy).SortDirection(sortDirection).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetItems``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetItems`: InlineResponse200
+    // response from `GetItems`: GetItems200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetItems`: %v\n", resp)
 }
 ```
@@ -844,7 +844,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse200**](InlineResponse200.md)
+[**GetItems200Response**](GetItems200Response.md)
 
 ### Authorization
 
@@ -862,7 +862,7 @@ No authorization required
 
 ## GetPaymentIntentById
 
-> InlineResponse20011 GetPaymentIntentById(ctx, paymentIntentId).MintAccessToken(mintAccessToken).Execute()
+> GetPaymentIntentById200Response GetPaymentIntentById(ctx, paymentIntentId).MintAccessToken(mintAccessToken).Execute()
 
 This API is responsible to get payment intent by its id
 
@@ -883,13 +883,13 @@ func main() {
     paymentIntentId := "paymentIntentId_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetPaymentIntentById(context.Background(), paymentIntentId).MintAccessToken(mintAccessToken).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetPaymentIntentById(context.Background(), paymentIntentId).MintAccessToken(mintAccessToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetPaymentIntentById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetPaymentIntentById`: InlineResponse20011
+    // response from `GetPaymentIntentById`: GetPaymentIntentById200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetPaymentIntentById`: %v\n", resp)
 }
 ```
@@ -914,7 +914,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20011**](InlineResponse20011.md)
+[**GetPaymentIntentById200Response**](GetPaymentIntentById200Response.md)
 
 ### Authorization
 
@@ -932,7 +932,7 @@ No authorization required
 
 ## GetProductERC721ById
 
-> InlineResponse20010 GetProductERC721ById(ctx).MintAccessToken(mintAccessToken).Id(id).Execute()
+> GetProductERC721ById200Response GetProductERC721ById(ctx).MintAccessToken(mintAccessToken).Id(id).Execute()
 
 Itemにパックされていて、ItemのstatusがpublishなProductERC721を取得
 
@@ -953,13 +953,13 @@ func main() {
     id := "id_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetProductERC721ById(context.Background()).MintAccessToken(mintAccessToken).Id(id).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetProductERC721ById(context.Background()).MintAccessToken(mintAccessToken).Id(id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetProductERC721ById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetProductERC721ById`: InlineResponse20010
+    // response from `GetProductERC721ById`: GetProductERC721ById200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetProductERC721ById`: %v\n", resp)
 }
 ```
@@ -980,7 +980,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20010**](InlineResponse20010.md)
+[**GetProductERC721ById200Response**](GetProductERC721ById200Response.md)
 
 ### Authorization
 
@@ -998,7 +998,7 @@ No authorization required
 
 ## GetProfile
 
-> InlineResponse20015 GetProfile(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Execute()
+> GetProfile200Response GetProfile(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Execute()
 
 ウォレットに紐づくプロフィールの取得
 
@@ -1021,13 +1021,13 @@ func main() {
     walletAddress := "walletAddress_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetProfile(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetProfile(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetProfile`: InlineResponse20015
+    // response from `GetProfile`: GetProfile200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetProfile`: %v\n", resp)
 }
 ```
@@ -1048,7 +1048,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20015**](InlineResponse20015.md)
+[**GetProfile200Response**](GetProfile200Response.md)
 
 ### Authorization
 
@@ -1066,7 +1066,7 @@ No authorization required
 
 ## GetSellableItemStockERC721Id
 
-> InlineResponse2002 GetSellableItemStockERC721Id(ctx).MintAccessToken(mintAccessToken).ItemId(itemId).Execute()
+> GetSellableItemStockERC721Id200Response GetSellableItemStockERC721Id(ctx).MintAccessToken(mintAccessToken).ItemId(itemId).Execute()
 
 スマコンで販売している`Item`の販売可能な(まだ売れていない)`ItemStockId`を取得する
 
@@ -1087,13 +1087,13 @@ func main() {
     itemId := "itemId_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetSellableItemStockERC721Id(context.Background()).MintAccessToken(mintAccessToken).ItemId(itemId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetSellableItemStockERC721Id(context.Background()).MintAccessToken(mintAccessToken).ItemId(itemId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetSellableItemStockERC721Id``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetSellableItemStockERC721Id`: InlineResponse2002
+    // response from `GetSellableItemStockERC721Id`: GetSellableItemStockERC721Id200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetSellableItemStockERC721Id`: %v\n", resp)
 }
 ```
@@ -1114,7 +1114,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2002**](InlineResponse2002.md)
+[**GetSellableItemStockERC721Id200Response**](GetSellableItemStockERC721Id200Response.md)
 
 ### Authorization
 
@@ -1132,7 +1132,7 @@ No authorization required
 
 ## GetSignByItemStockId
 
-> InlineResponse2003 GetSignByItemStockId(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).SignatureType(signatureType).WalletAddress(walletAddress).Residence(residence).Execute()
+> GetSignByItemStockId200Response GetSignByItemStockId(ctx).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).SignatureType(signatureType).WalletAddress(walletAddress).Residence(residence).Execute()
 
 Item購入に関してスマコンの操作に必要なSignを返す
 
@@ -1156,13 +1156,13 @@ func main() {
     residence := "residence_example" // string | 購入時のみ必須 (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetSignByItemStockId(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).SignatureType(signatureType).WalletAddress(walletAddress).Residence(residence).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetSignByItemStockId(context.Background()).MintAccessToken(mintAccessToken).ItemStockId(itemStockId).SignatureType(signatureType).WalletAddress(walletAddress).Residence(residence).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetSignByItemStockId``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetSignByItemStockId`: InlineResponse2003
+    // response from `GetSignByItemStockId`: GetSignByItemStockId200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetSignByItemStockId`: %v\n", resp)
 }
 ```
@@ -1186,7 +1186,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse2003**](InlineResponse2003.md)
+[**GetSignByItemStockId200Response**](GetSignByItemStockId200Response.md)
 
 ### Authorization
 
@@ -1204,7 +1204,7 @@ No authorization required
 
 ## GetTokenERC721ById
 
-> InlineResponse20014 GetTokenERC721ById(ctx, tokenId).MintAccessToken(mintAccessToken).Execute()
+> GetTokenERC721ById200Response GetTokenERC721ById(ctx, tokenId).MintAccessToken(mintAccessToken).Execute()
 
 get TokenERC721 by Id
 
@@ -1225,13 +1225,13 @@ func main() {
     tokenId := "tokenId_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetTokenERC721ById(context.Background(), tokenId).MintAccessToken(mintAccessToken).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetTokenERC721ById(context.Background(), tokenId).MintAccessToken(mintAccessToken).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetTokenERC721ById``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetTokenERC721ById`: InlineResponse20014
+    // response from `GetTokenERC721ById`: GetTokenERC721ById200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetTokenERC721ById`: %v\n", resp)
 }
 ```
@@ -1256,7 +1256,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20014**](InlineResponse20014.md)
+[**GetTokenERC721ById200Response**](GetTokenERC721ById200Response.md)
 
 ### Authorization
 
@@ -1274,7 +1274,7 @@ No authorization required
 
 ## GetTokenERC721sByWalletAddress
 
-> InlineResponse20012 GetTokenERC721sByWalletAddress(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).Execute()
+> GetTokenERC721sByWalletAddress200Response GetTokenERC721sByWalletAddress(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).Execute()
 
 walletAddressに紐づくTokenERC721を全て取得する
 
@@ -1297,13 +1297,13 @@ func main() {
     perPage := "perPage_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetTokenERC721sByWalletAddress(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetTokenERC721sByWalletAddress(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).Page(page).PerPage(perPage).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetTokenERC721sByWalletAddress``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetTokenERC721sByWalletAddress`: InlineResponse20012
+    // response from `GetTokenERC721sByWalletAddress`: GetTokenERC721sByWalletAddress200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetTokenERC721sByWalletAddress`: %v\n", resp)
 }
 ```
@@ -1326,7 +1326,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**GetTokenERC721sByWalletAddress200Response**](GetTokenERC721sByWalletAddress200Response.md)
 
 ### Authorization
 
@@ -1344,7 +1344,7 @@ No authorization required
 
 ## GetTokentERC721sByWalletAddressFromAnyContract
 
-> InlineResponse20012 GetTokentERC721sByWalletAddressFromAnyContract(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).Execute()
+> GetTokenERC721sByWalletAddress200Response GetTokentERC721sByWalletAddressFromAnyContract(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).Execute()
 
 get TokenERC721s by specifying wallet address and contract address
 
@@ -1366,13 +1366,13 @@ func main() {
     contractAddress := "contractAddress_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.GetTokentERC721sByWalletAddressFromAnyContract(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.GetTokentERC721sByWalletAddressFromAnyContract(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetTokentERC721sByWalletAddressFromAnyContract``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetTokentERC721sByWalletAddressFromAnyContract`: InlineResponse20012
+    // response from `GetTokentERC721sByWalletAddressFromAnyContract`: GetTokenERC721sByWalletAddress200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetTokentERC721sByWalletAddressFromAnyContract`: %v\n", resp)
 }
 ```
@@ -1394,7 +1394,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20012**](InlineResponse20012.md)
+[**GetTokenERC721sByWalletAddress200Response**](GetTokenERC721sByWalletAddress200Response.md)
 
 ### Authorization
 
@@ -1412,7 +1412,7 @@ No authorization required
 
 ## HasNft
 
-> InlineResponse20013 HasNft(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).TokenId(tokenId).Execute()
+> HasNfts200Response HasNft(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).TokenId(tokenId).Execute()
 
 has token id of nft or not in contract
 
@@ -1435,13 +1435,13 @@ func main() {
     tokenId := "tokenId_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.HasNft(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).TokenId(tokenId).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.HasNft(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).TokenId(tokenId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.HasNft``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `HasNft`: InlineResponse20013
+    // response from `HasNft`: HasNfts200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.HasNft`: %v\n", resp)
 }
 ```
@@ -1464,7 +1464,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**HasNfts200Response**](HasNfts200Response.md)
 
 ### Authorization
 
@@ -1482,7 +1482,7 @@ No authorization required
 
 ## HasNfts
 
-> InlineResponse20013 HasNfts(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).Execute()
+> HasNfts200Response HasNfts(ctx).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).Execute()
 
 has nfts or not in contract
 
@@ -1504,13 +1504,13 @@ func main() {
     contractAddress := "contractAddress_example" // string | 
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.HasNfts(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.HasNfts(context.Background()).MintAccessToken(mintAccessToken).WalletAddress(walletAddress).ContractAddress(contractAddress).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.HasNfts``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `HasNfts`: InlineResponse20013
+    // response from `HasNfts`: HasNfts200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.HasNfts`: %v\n", resp)
 }
 ```
@@ -1532,7 +1532,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**InlineResponse20013**](InlineResponse20013.md)
+[**HasNfts200Response**](HasNfts200Response.md)
 
 ### Authorization
 
@@ -1550,7 +1550,7 @@ No authorization required
 
 ## UpdateProfile
 
-> InlineResponse20016 UpdateProfile(ctx).MintAccessToken(mintAccessToken).InlineObject2(inlineObject2).Execute()
+> UpdateProfile200Response UpdateProfile(ctx).MintAccessToken(mintAccessToken).UpdateProfileRequest(updateProfileRequest).Execute()
 
 ウォレットに紐づくプロフィールの作成
 
@@ -1568,16 +1568,16 @@ import (
 
 func main() {
     mintAccessToken := "mintAccessToken_example" // string | 
-    inlineObject2 := *openapiclient.NewInlineObject2(*openapiclient.NewWalletAddressProfile("WalletAddress_example", "AvatarImageId_example", "DisplayName_example", "Bio_example", "TwitterAccountName_example", "InstagramAccountName_example", "HomepageUrl_example"), "Signature_example") // InlineObject2 |  (optional)
+    updateProfileRequest := *openapiclient.NewUpdateProfileRequest(*openapiclient.NewWalletAddressProfile("WalletAddress_example", "AvatarImageId_example", "DisplayName_example", "Bio_example", "TwitterAccountName_example", "InstagramAccountName_example", "HomepageUrl_example"), "Signature_example") // UpdateProfileRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DefaultApi.UpdateProfile(context.Background()).MintAccessToken(mintAccessToken).InlineObject2(inlineObject2).Execute()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.DefaultApi.UpdateProfile(context.Background()).MintAccessToken(mintAccessToken).UpdateProfileRequest(updateProfileRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.UpdateProfile``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateProfile`: InlineResponse20016
+    // response from `UpdateProfile`: UpdateProfile200Response
     fmt.Fprintf(os.Stdout, "Response from `DefaultApi.UpdateProfile`: %v\n", resp)
 }
 ```
@@ -1594,11 +1594,11 @@ Other parameters are passed through a pointer to a apiUpdateProfileRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **mintAccessToken** | **string** |  | 
- **inlineObject2** | [**InlineObject2**](InlineObject2.md) |  | 
+ **updateProfileRequest** | [**UpdateProfileRequest**](UpdateProfileRequest.md) |  | 
 
 ### Return type
 
-[**InlineResponse20016**](InlineResponse20016.md)
+[**UpdateProfile200Response**](UpdateProfile200Response.md)
 
 ### Authorization
 

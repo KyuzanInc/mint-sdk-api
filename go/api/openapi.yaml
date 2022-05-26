@@ -62,7 +62,7 @@ paths:
           - credit-card-stripe-fixed-price
           type: string
         style: form
-      - description: ', 区切りで指定'
+      - description: ", 区切りで指定"
         explode: true
         in: query
         name: tags
@@ -94,20 +94,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200'
+                $ref: '#/components/schemas/GetItems_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: プロジェクトのItemを全て取得する
   /sdk_v4/items/{itemId}:
     get:
@@ -132,20 +132,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/GetItemById_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: プロジェクトのItemをId指定で取得する
   /sdk_v4/items/getSellableItemStockERC721Id:
     get:
@@ -170,20 +170,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_2'
+                $ref: '#/components/schemas/GetSellableItemStockERC721Id_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: スマコンで販売している`Item`の販売可能な(まだ売れていない)`ItemStockId`を取得する
   /sdk_v4/items/getItemByTokenERC721:
     get:
@@ -208,20 +208,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_1'
+                $ref: '#/components/schemas/GetItemById_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: get item by tokenERC721 id
   /sdk_v4/itemStocks/sign:
     get:
@@ -272,20 +272,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_3'
+                $ref: '#/components/schemas/GetSignByItemStockId_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: Item購入に関してスマコンの操作に必要なSignを返す
   /sdk_v4/itemStocks/getById:
     get:
@@ -310,20 +310,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_4'
+                $ref: '#/components/schemas/GetItemStockById_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: ItemStockをId指定で取得する
   /sdk_v4/itemStocks/getBiddedItemStocksByWalletAddress:
     get:
@@ -389,26 +389,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_5'
+                $ref: '#/components/schemas/GetBiddedItemStocksByWalletAddress_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: 指定したwalletAddressでBidしたItemStockを取得する
   /sdk_v4/itemStocks/getBoughtItemStocksByWalletAddress:
     get:
@@ -467,26 +467,26 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_6'
+                $ref: '#/components/schemas/GetBoughtItemStocksByWalletAddress_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: 指定したwalletAddressで購入または落札したItemStockを取得する
   /sdk_v4/itemStockPhysicalShippingInfos/getItemStockPhysicalShippingInfoStatusByItemStockId:
     get:
@@ -511,20 +511,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_7'
+                $ref: '#/components/schemas/GetItemStockPhysicalShippingInfoStatusByItemStockId_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: API for getting item stock physical shipping info status by item stock
         id
   /sdk_v4/itemStockPhysicalShippingInfos/getItemStockPhysicalShippingInfoByItemStockId:
@@ -546,44 +546,35 @@ paths:
           type: string
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/inline_object'
         content:
           application/json:
             schema:
-              properties:
-                data:
-                  $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data'
-                signature:
-                  type: string
-              required:
-              - data
-              - signature
-              type: object
+              $ref: '#/components/schemas/GetItemStockPhysicalShippingInfoByItemStockId_request'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_8'
+                $ref: '#/components/schemas/GetItemStockPhysicalShippingInfoByItemStockId_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: API for getting item stock physical shipping info by item stock id
   /sdk_v4/itemStockPhysicalShippingInfos/createOrUpdateItemStockPhysicalShippingInfo:
     post:
@@ -604,44 +595,35 @@ paths:
           type: string
         style: form
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_1'
         content:
           application/json:
             schema:
-              properties:
-                data:
-                  $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_createOrUpdateItemStockPhysicalShippingInfo_data'
-                signature:
-                  type: string
-              required:
-              - data
-              - signature
-              type: object
+              $ref: '#/components/schemas/CreateOrUpdateItemStockPhysicalShippingInfo_request'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_9'
+                $ref: '#/components/schemas/CreateOrUpdateItemStockPhysicalShippingInfo_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: API for creating or updating item stock physical shipping info for
         given item stock id
   /sdk_v4/products/getProductERC721ById:
@@ -667,20 +649,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_10'
+                $ref: '#/components/schemas/GetProductERC721ById_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: Itemにパックされていて、ItemのstatusがpublishなProductERC721を取得
   /sdk_v4/paymentIntents/{paymentIntentId}:
     get:
@@ -705,32 +687,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_11'
+                $ref: '#/components/schemas/GetPaymentIntentById_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: This API is responsible to get payment intent by its id
   /sdk_v4/tokens/getTokenERC721sByWalletAddress:
     get:
@@ -769,20 +751,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_12'
+                $ref: '#/components/schemas/GetTokenERC721sByWalletAddress_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: walletAddressに紐づくTokenERC721を全て取得する
   /sdk_v4/tokens/hasNfts:
     get:
@@ -814,20 +796,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/HasNfts_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: has nfts or not in contract
   /sdk_v4/tokens/hasNft:
     get:
@@ -866,20 +848,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_13'
+                $ref: '#/components/schemas/HasNfts_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: has token id of nft or not in contract
   /sdk_v4/tokens/getTokentERC721sByWalletAddressFromAnyContract:
     get:
@@ -911,20 +893,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_12'
+                $ref: '#/components/schemas/GetTokenERC721sByWalletAddress_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: get TokenERC721s by specifying wallet address and contract address
   /sdk_v4/tokens/{tokenId}:
     get:
@@ -949,32 +931,32 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_14'
+                $ref: '#/components/schemas/GetTokenERC721ById_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "403":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: get TokenERC721 by Id
   /sdk_v4/profile:
     get:
@@ -1000,14 +982,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_15'
+                $ref: '#/components/schemas/GetProfile_200_response'
           description: OK
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: ウォレットに紐づくプロフィールの取得
     post:
       operationId: UpdateProfile
@@ -1020,38 +1002,29 @@ paths:
           type: string
         style: simple
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_2'
         content:
           application/json:
             schema:
-              properties:
-                profile:
-                  $ref: '#/components/schemas/WalletAddressProfile'
-                signature:
-                  type: string
-              required:
-              - profile
-              - signature
-              type: object
+              $ref: '#/components/schemas/UpdateProfile_request'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_16'
+                $ref: '#/components/schemas/UpdateProfile_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "401":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: ウォレットに紐づくプロフィールの作成
   /sdk_v4/avatar:
     get:
@@ -1069,14 +1042,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_17'
+                $ref: '#/components/schemas/GetAvatar_200_response'
           description: OK
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: アバター画像の署名付きURLの取得
       tags: []
   /sdk_v4/contracts/getContractERC721ById:
@@ -1102,20 +1075,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_18'
+                $ref: '#/components/schemas/getContractERC721ById_200_response'
           description: OK
         "400":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
         "500":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_400'
-          description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+                $ref: '#/components/schemas/GetItems_400_response'
+          description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
       summary: ContractERC721をId指定で取得する
   /sdk_v4/stripePayment/createStripePaymentIntent:
     post:
@@ -1129,30 +1102,16 @@ paths:
           type: string
         style: simple
       requestBody:
-        $ref: '#/components/requestBodies/inline_object_3'
         content:
           application/json:
             schema:
-              properties:
-                itemId:
-                  description: Item id that will be purchased
-                  type: string
-                toAddress:
-                  description: Buyer wallet address
-                  type: string
-                userResidence:
-                  $ref: '#/components/schemas/UserResidence'
-              required:
-              - itemId
-              - toAddress
-              - userResidence
-              type: object
+              $ref: '#/components/schemas/CreateStripePaymentIntent_request'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/inline_response_200_19'
+                $ref: '#/components/schemas/CreateStripePaymentIntent_200_response'
           description: OK
       summary: クレジットカード(Stripe)で指定のアイテムを購入するためのPyamentIntentを作成し、対応するSecretを返す
 components:
@@ -1200,39 +1159,18 @@ components:
       schema:
         type: string
       style: form
-  requestBodies:
-    inline_object_1:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_1'
-    inline_object:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object'
-    inline_object_3:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_3'
-    inline_object_2:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/inline_object_2'
   responses:
     Error:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/inline_response_400'
-      description: MintAPIサーバーから返される40x,50x系エラーレスポンス
+            $ref: '#/components/schemas/GetItems_400_response'
+      description: "MintAPIサーバーから返される40x,50x系エラーレスポンス"
   schemas:
     Item:
       example:
-        metadata: '{}'
-        paymentMethodData: ""
+        metadata: "{}"
+        paymentMethodData: null
         productERC721Ids:
         - productERC721Ids
         - productERC721Ids
@@ -1242,6 +1180,7 @@ components:
         updateAt: 2000-01-23T04:56:07.000+00:00
         description: description
         feeRatePermill: 5.637376656633329
+        type: null
         endAt: 2000-01-23T04:56:07.000+00:00
         availableStockNum: 2.3021358869347655
         createAt: 2000-01-23T04:56:07.000+00:00
@@ -1254,6 +1193,7 @@ components:
           eur: 1.4658129805029452
           usd: 5.962133916683182
           updateAt: 2000-01-23T04:56:07.000+00:00
+          currency: null
           createAt: 2000-01-23T04:56:07.000+00:00
         name: name
         previews:
@@ -1269,10 +1209,13 @@ components:
             eur: 1.4658129805029452
             usd: 5.962133916683182
             updateAt: 2000-01-23T04:56:07.000+00:00
+            currency: null
             createAt: 2000-01-23T04:56:07.000+00:00
           transactionAt: 2000-01-23T04:56:07.000+00:00
           updateAt: 2000-01-23T04:56:07.000+00:00
+          networkId: null
           id: id
+          chainType: null
           createAt: 2000-01-23T04:56:07.000+00:00
           bidPrice: 7.061401241503109
           transactionHash: transactionHash
@@ -1283,10 +1226,13 @@ components:
             eur: 1.4658129805029452
             usd: 5.962133916683182
             updateAt: 2000-01-23T04:56:07.000+00:00
+            currency: null
             createAt: 2000-01-23T04:56:07.000+00:00
           transactionAt: 2000-01-23T04:56:07.000+00:00
           updateAt: 2000-01-23T04:56:07.000+00:00
+          networkId: null
           id: id
+          chainType: null
           createAt: 2000-01-23T04:56:07.000+00:00
           bidPrice: 7.061401241503109
           transactionHash: transactionHash
@@ -1331,11 +1277,7 @@ components:
             type: string
           type: array
         paymentMethodData:
-          description: paymentMethodによって異なるデータ
-          oneOf:
-          - $ref: '#/components/schemas/ItemPaymentMethodDataEthereumContractERC721ShopFixedPrice'
-          - $ref: '#/components/schemas/ItemPaymentMethodDataEthereumContractERC721ShopAuction'
-          - $ref: '#/components/schemas/ItemPaymentMethodDataCreditCardStripeFixedPrice'
+          $ref: '#/components/schemas/Item_paymentMethodData'
         itemStockIds:
           items:
             type: string
@@ -1390,6 +1332,7 @@ components:
         id: id
         state: state
         email: email
+        status: null
       properties:
         id:
           nullable: true
@@ -1485,11 +1428,13 @@ components:
         cryptoPaymentIntentId: cryptoPaymentIntentId
         contractMethodResource:
           args:
-          - ""
-          - ""
+          - null
+          - null
           contractAddress: contractAddress
           methodName: methodName
           abi: abi
+          networkId: null
+          chainType: null
       properties:
         cryptoPaymentIntentId:
           type: string
@@ -1583,7 +1528,8 @@ components:
     ItemStock:
       example:
         productsData:
-        - metadata: '{}'
+        - metadata: "{}"
+          tokenStandardType: null
           tokenId: 0.8008281904610115
           tokenURI: tokenURI
           productGroupId: productGroupId
@@ -1595,7 +1541,8 @@ components:
           id: id
           productBlueprintId: productBlueprintId
           status: created
-        - metadata: '{}'
+        - metadata: "{}"
+          tokenStandardType: null
           tokenId: 0.8008281904610115
           tokenURI: tokenURI
           productGroupId: productGroupId
@@ -1608,8 +1555,8 @@ components:
           productBlueprintId: productBlueprintId
           status: created
         item:
-          metadata: '{}'
-          paymentMethodData: ""
+          metadata: "{}"
+          paymentMethodData: null
           productERC721Ids:
           - productERC721Ids
           - productERC721Ids
@@ -1619,6 +1566,7 @@ components:
           updateAt: 2000-01-23T04:56:07.000+00:00
           description: description
           feeRatePermill: 5.637376656633329
+          type: null
           endAt: 2000-01-23T04:56:07.000+00:00
           availableStockNum: 2.3021358869347655
           createAt: 2000-01-23T04:56:07.000+00:00
@@ -1631,6 +1579,7 @@ components:
             eur: 1.4658129805029452
             usd: 5.962133916683182
             updateAt: 2000-01-23T04:56:07.000+00:00
+            currency: null
             createAt: 2000-01-23T04:56:07.000+00:00
           name: name
           previews:
@@ -1646,10 +1595,13 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             transactionAt: 2000-01-23T04:56:07.000+00:00
             updateAt: 2000-01-23T04:56:07.000+00:00
+            networkId: null
             id: id
+            chainType: null
             createAt: 2000-01-23T04:56:07.000+00:00
             bidPrice: 7.061401241503109
             transactionHash: transactionHash
@@ -1660,10 +1612,13 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             transactionAt: 2000-01-23T04:56:07.000+00:00
             updateAt: 2000-01-23T04:56:07.000+00:00
+            networkId: null
             id: id
+            chainType: null
             createAt: 2000-01-23T04:56:07.000+00:00
             bidPrice: 7.061401241503109
             transactionHash: transactionHash
@@ -1672,6 +1627,7 @@ components:
         updateAt: 2000-01-23T04:56:07.000+00:00
         id: id
         createAt: 2000-01-23T04:56:07.000+00:00
+        status: null
       properties:
         id:
           type: string
@@ -1701,9 +1657,12 @@ components:
       description: ContractERC721のデータ
       example:
         address: address
+        tokenStandardType: null
         name: name
         updateAt: 2000-01-23T04:56:07.000+00:00
+        networkId: null
         id: id
+        chainType: null
         createAt: 2000-01-23T04:56:07.000+00:00
         initialDeployBlockNumber: 0.8008281904610115
       properties:
@@ -1740,7 +1699,8 @@ components:
       type: object
     ProductERC721:
       example:
-        metadata: '{}'
+        metadata: "{}"
+        tokenStandardType: null
         tokenId: 0.8008281904610115
         tokenURI: tokenURI
         productGroupId: productGroupId
@@ -1816,7 +1776,8 @@ components:
         - from: from
           to: to
           transactionHash: transactionHash
-        metadata: '{}'
+        metadata: "{}"
+        tokenStandardType: null
         tokenId: 0.8008281904610115
         tokenURI: tokenURI
         mintTransactionHash: mintTransactionHash
@@ -1878,10 +1839,13 @@ components:
           eur: 1.4658129805029452
           usd: 5.962133916683182
           updateAt: 2000-01-23T04:56:07.000+00:00
+          currency: null
           createAt: 2000-01-23T04:56:07.000+00:00
         transactionAt: 2000-01-23T04:56:07.000+00:00
         updateAt: 2000-01-23T04:56:07.000+00:00
+        networkId: null
         id: id
+        chainType: null
         createAt: 2000-01-23T04:56:07.000+00:00
         bidPrice: 7.061401241503109
         transactionHash: transactionHash
@@ -1930,6 +1894,7 @@ components:
         eur: 1.4658129805029452
         usd: 5.962133916683182
         updateAt: 2000-01-23T04:56:07.000+00:00
+        currency: null
         createAt: 2000-01-23T04:56:07.000+00:00
       properties:
         createAt:
@@ -2078,11 +2043,29 @@ components:
       - walletAddress
       title: WalletAddressProfile
       type: object
-    inline_response_200:
+    OneOfAny:
+      oneOf:
+      - type: string
+      - type: number
+      - type: integer
+      - type: boolean
+      - items: {}
+        type: array
+      - type: object
+    AnyOfAny:
+      anyOf:
+      - type: string
+      - type: number
+      - type: integer
+      - type: boolean
+      - items: {}
+        type: array
+      - type: object
+    GetItems_200_response:
       example:
         data:
-        - metadata: '{}'
-          paymentMethodData: ""
+        - metadata: "{}"
+          paymentMethodData: null
           productERC721Ids:
           - productERC721Ids
           - productERC721Ids
@@ -2092,6 +2075,7 @@ components:
           updateAt: 2000-01-23T04:56:07.000+00:00
           description: description
           feeRatePermill: 5.637376656633329
+          type: null
           endAt: 2000-01-23T04:56:07.000+00:00
           availableStockNum: 2.3021358869347655
           createAt: 2000-01-23T04:56:07.000+00:00
@@ -2104,6 +2088,7 @@ components:
             eur: 1.4658129805029452
             usd: 5.962133916683182
             updateAt: 2000-01-23T04:56:07.000+00:00
+            currency: null
             createAt: 2000-01-23T04:56:07.000+00:00
           name: name
           previews:
@@ -2119,10 +2104,13 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             transactionAt: 2000-01-23T04:56:07.000+00:00
             updateAt: 2000-01-23T04:56:07.000+00:00
+            networkId: null
             id: id
+            chainType: null
             createAt: 2000-01-23T04:56:07.000+00:00
             bidPrice: 7.061401241503109
             transactionHash: transactionHash
@@ -2133,17 +2121,20 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             transactionAt: 2000-01-23T04:56:07.000+00:00
             updateAt: 2000-01-23T04:56:07.000+00:00
+            networkId: null
             id: id
+            chainType: null
             createAt: 2000-01-23T04:56:07.000+00:00
             bidPrice: 7.061401241503109
             transactionHash: transactionHash
           id: id
           startAt: 2000-01-23T04:56:07.000+00:00
-        - metadata: '{}'
-          paymentMethodData: ""
+        - metadata: "{}"
+          paymentMethodData: null
           productERC721Ids:
           - productERC721Ids
           - productERC721Ids
@@ -2153,6 +2144,7 @@ components:
           updateAt: 2000-01-23T04:56:07.000+00:00
           description: description
           feeRatePermill: 5.637376656633329
+          type: null
           endAt: 2000-01-23T04:56:07.000+00:00
           availableStockNum: 2.3021358869347655
           createAt: 2000-01-23T04:56:07.000+00:00
@@ -2165,6 +2157,7 @@ components:
             eur: 1.4658129805029452
             usd: 5.962133916683182
             updateAt: 2000-01-23T04:56:07.000+00:00
+            currency: null
             createAt: 2000-01-23T04:56:07.000+00:00
           name: name
           previews:
@@ -2180,10 +2173,13 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             transactionAt: 2000-01-23T04:56:07.000+00:00
             updateAt: 2000-01-23T04:56:07.000+00:00
+            networkId: null
             id: id
+            chainType: null
             createAt: 2000-01-23T04:56:07.000+00:00
             bidPrice: 7.061401241503109
             transactionHash: transactionHash
@@ -2194,16 +2190,19 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             transactionAt: 2000-01-23T04:56:07.000+00:00
             updateAt: 2000-01-23T04:56:07.000+00:00
+            networkId: null
             id: id
+            chainType: null
             createAt: 2000-01-23T04:56:07.000+00:00
             bidPrice: 7.061401241503109
             transactionHash: transactionHash
           id: id
           startAt: 2000-01-23T04:56:07.000+00:00
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
           items:
@@ -2215,18 +2214,18 @@ components:
       - data
       - meta
       type: object
-    inline_response_400:
+    GetItems_400_response:
       properties:
         message:
           type: string
       required:
       - message
       type: object
-    inline_response_200_1:
+    GetItemById_200_response:
       example:
         data:
-          metadata: '{}'
-          paymentMethodData: ""
+          metadata: "{}"
+          paymentMethodData: null
           productERC721Ids:
           - productERC721Ids
           - productERC721Ids
@@ -2236,6 +2235,7 @@ components:
           updateAt: 2000-01-23T04:56:07.000+00:00
           description: description
           feeRatePermill: 5.637376656633329
+          type: null
           endAt: 2000-01-23T04:56:07.000+00:00
           availableStockNum: 2.3021358869347655
           createAt: 2000-01-23T04:56:07.000+00:00
@@ -2248,6 +2248,7 @@ components:
             eur: 1.4658129805029452
             usd: 5.962133916683182
             updateAt: 2000-01-23T04:56:07.000+00:00
+            currency: null
             createAt: 2000-01-23T04:56:07.000+00:00
           name: name
           previews:
@@ -2263,10 +2264,13 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             transactionAt: 2000-01-23T04:56:07.000+00:00
             updateAt: 2000-01-23T04:56:07.000+00:00
+            networkId: null
             id: id
+            chainType: null
             createAt: 2000-01-23T04:56:07.000+00:00
             bidPrice: 7.061401241503109
             transactionHash: transactionHash
@@ -2277,16 +2281,19 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             transactionAt: 2000-01-23T04:56:07.000+00:00
             updateAt: 2000-01-23T04:56:07.000+00:00
+            networkId: null
             id: id
+            chainType: null
             createAt: 2000-01-23T04:56:07.000+00:00
             bidPrice: 7.061401241503109
             transactionHash: transactionHash
           id: id
           startAt: 2000-01-23T04:56:07.000+00:00
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
           $ref: '#/components/schemas/Item'
@@ -2296,7 +2303,7 @@ components:
       - data
       - meta
       type: object
-    inline_response_200_2_data:
+    GetSellableItemStockERC721Id_200_response_data:
       example:
         itemStockId: itemStockId
       properties:
@@ -2305,67 +2312,61 @@ components:
       required:
       - itemStockId
       type: object
-    inline_response_200_2:
+    GetSellableItemStockERC721Id_200_response:
       example:
         data:
           itemStockId: itemStockId
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
-          $ref: '#/components/schemas/inline_response_200_2_data'
+          $ref: '#/components/schemas/GetSellableItemStockERC721Id_200_response_data'
         meta:
           type: object
       required:
       - data
       - meta
       type: object
-    inline_response_200_3_data:
+    GetSignByItemStockId_200_response_data:
       example:
         signature: signature
         contractMethodArg:
-        - ""
-        - ""
+        - null
+        - null
       properties:
         signature:
           type: string
         contractMethodArg:
           description: 対応したコントラクトのメソッドに渡す
           items:
-            anyOf:
-            - type: string
-            - type: number
-            - type: integer
-            - type: boolean
-            - items: {}
-              type: array
-            - type: object
+            $ref: '#/components/schemas/AnyOfAny'
           type: array
       required:
       - contractMethodArg
       - signature
       type: object
-    inline_response_200_3:
+    GetSignByItemStockId_200_response:
       example:
         data:
           signature: signature
           contractMethodArg:
-          - ""
-          - ""
-        meta: '{}'
+          - null
+          - null
+        meta: "{}"
       properties:
         data:
-          $ref: '#/components/schemas/inline_response_200_3_data'
+          $ref: '#/components/schemas/GetSignByItemStockId_200_response_data'
         meta:
           type: object
       required:
       - data
       - meta
       type: object
-    inline_response_200_4:
+    GetItemStockById_200_response:
       example:
         data:
           productsData:
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2377,7 +2378,8 @@ components:
             id: id
             productBlueprintId: productBlueprintId
             status: created
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2390,8 +2392,8 @@ components:
             productBlueprintId: productBlueprintId
             status: created
           item:
-            metadata: '{}'
-            paymentMethodData: ""
+            metadata: "{}"
+            paymentMethodData: null
             productERC721Ids:
             - productERC721Ids
             - productERC721Ids
@@ -2401,6 +2403,7 @@ components:
             updateAt: 2000-01-23T04:56:07.000+00:00
             description: description
             feeRatePermill: 5.637376656633329
+            type: null
             endAt: 2000-01-23T04:56:07.000+00:00
             availableStockNum: 2.3021358869347655
             createAt: 2000-01-23T04:56:07.000+00:00
@@ -2413,6 +2416,7 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             name: name
             previews:
@@ -2428,10 +2432,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2442,10 +2449,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2454,7 +2464,8 @@ components:
           updateAt: 2000-01-23T04:56:07.000+00:00
           id: id
           createAt: 2000-01-23T04:56:07.000+00:00
-        meta: '{}'
+          status: null
+        meta: "{}"
       properties:
         data:
           $ref: '#/components/schemas/ItemStock'
@@ -2464,11 +2475,12 @@ components:
       - data
       - meta
       type: object
-    inline_response_200_5:
+    GetBiddedItemStocksByWalletAddress_200_response:
       example:
         data:
         - productsData:
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2480,7 +2492,8 @@ components:
             id: id
             productBlueprintId: productBlueprintId
             status: created
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2493,8 +2506,8 @@ components:
             productBlueprintId: productBlueprintId
             status: created
           item:
-            metadata: '{}'
-            paymentMethodData: ""
+            metadata: "{}"
+            paymentMethodData: null
             productERC721Ids:
             - productERC721Ids
             - productERC721Ids
@@ -2504,6 +2517,7 @@ components:
             updateAt: 2000-01-23T04:56:07.000+00:00
             description: description
             feeRatePermill: 5.637376656633329
+            type: null
             endAt: 2000-01-23T04:56:07.000+00:00
             availableStockNum: 2.3021358869347655
             createAt: 2000-01-23T04:56:07.000+00:00
@@ -2516,6 +2530,7 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             name: name
             previews:
@@ -2531,10 +2546,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2545,10 +2563,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2557,8 +2578,10 @@ components:
           updateAt: 2000-01-23T04:56:07.000+00:00
           id: id
           createAt: 2000-01-23T04:56:07.000+00:00
+          status: null
         - productsData:
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2570,7 +2593,8 @@ components:
             id: id
             productBlueprintId: productBlueprintId
             status: created
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2583,8 +2607,8 @@ components:
             productBlueprintId: productBlueprintId
             status: created
           item:
-            metadata: '{}'
-            paymentMethodData: ""
+            metadata: "{}"
+            paymentMethodData: null
             productERC721Ids:
             - productERC721Ids
             - productERC721Ids
@@ -2594,6 +2618,7 @@ components:
             updateAt: 2000-01-23T04:56:07.000+00:00
             description: description
             feeRatePermill: 5.637376656633329
+            type: null
             endAt: 2000-01-23T04:56:07.000+00:00
             availableStockNum: 2.3021358869347655
             createAt: 2000-01-23T04:56:07.000+00:00
@@ -2606,6 +2631,7 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             name: name
             previews:
@@ -2621,10 +2647,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2635,10 +2664,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2647,7 +2679,8 @@ components:
           updateAt: 2000-01-23T04:56:07.000+00:00
           id: id
           createAt: 2000-01-23T04:56:07.000+00:00
-        meta: '{}'
+          status: null
+        meta: "{}"
       properties:
         data:
           items:
@@ -2659,11 +2692,12 @@ components:
       - data
       - meta
       type: object
-    inline_response_200_6_data:
+    GetBoughtItemStocksByWalletAddress_200_response_data:
       example:
         itemStocks:
         - productsData:
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2675,7 +2709,8 @@ components:
             id: id
             productBlueprintId: productBlueprintId
             status: created
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2688,8 +2723,8 @@ components:
             productBlueprintId: productBlueprintId
             status: created
           item:
-            metadata: '{}'
-            paymentMethodData: ""
+            metadata: "{}"
+            paymentMethodData: null
             productERC721Ids:
             - productERC721Ids
             - productERC721Ids
@@ -2699,6 +2734,7 @@ components:
             updateAt: 2000-01-23T04:56:07.000+00:00
             description: description
             feeRatePermill: 5.637376656633329
+            type: null
             endAt: 2000-01-23T04:56:07.000+00:00
             availableStockNum: 2.3021358869347655
             createAt: 2000-01-23T04:56:07.000+00:00
@@ -2711,6 +2747,7 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             name: name
             previews:
@@ -2726,10 +2763,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2740,10 +2780,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2752,8 +2795,10 @@ components:
           updateAt: 2000-01-23T04:56:07.000+00:00
           id: id
           createAt: 2000-01-23T04:56:07.000+00:00
+          status: null
         - productsData:
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2765,7 +2810,8 @@ components:
             id: id
             productBlueprintId: productBlueprintId
             status: created
-          - metadata: '{}'
+          - metadata: "{}"
+            tokenStandardType: null
             tokenId: 0.8008281904610115
             tokenURI: tokenURI
             productGroupId: productGroupId
@@ -2778,8 +2824,8 @@ components:
             productBlueprintId: productBlueprintId
             status: created
           item:
-            metadata: '{}'
-            paymentMethodData: ""
+            metadata: "{}"
+            paymentMethodData: null
             productERC721Ids:
             - productERC721Ids
             - productERC721Ids
@@ -2789,6 +2835,7 @@ components:
             updateAt: 2000-01-23T04:56:07.000+00:00
             description: description
             feeRatePermill: 5.637376656633329
+            type: null
             endAt: 2000-01-23T04:56:07.000+00:00
             availableStockNum: 2.3021358869347655
             createAt: 2000-01-23T04:56:07.000+00:00
@@ -2801,6 +2848,7 @@ components:
               eur: 1.4658129805029452
               usd: 5.962133916683182
               updateAt: 2000-01-23T04:56:07.000+00:00
+              currency: null
               createAt: 2000-01-23T04:56:07.000+00:00
             name: name
             previews:
@@ -2816,10 +2864,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2830,10 +2881,13 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               transactionAt: 2000-01-23T04:56:07.000+00:00
               updateAt: 2000-01-23T04:56:07.000+00:00
+              networkId: null
               id: id
+              chainType: null
               createAt: 2000-01-23T04:56:07.000+00:00
               bidPrice: 7.061401241503109
               transactionHash: transactionHash
@@ -2842,6 +2896,7 @@ components:
           updateAt: 2000-01-23T04:56:07.000+00:00
           id: id
           createAt: 2000-01-23T04:56:07.000+00:00
+          status: null
       properties:
         itemStocks:
           items:
@@ -2850,12 +2905,13 @@ components:
       required:
       - itemStocks
       type: object
-    inline_response_200_6:
+    GetBoughtItemStocksByWalletAddress_200_response:
       example:
         data:
           itemStocks:
           - productsData:
-            - metadata: '{}'
+            - metadata: "{}"
+              tokenStandardType: null
               tokenId: 0.8008281904610115
               tokenURI: tokenURI
               productGroupId: productGroupId
@@ -2867,7 +2923,8 @@ components:
               id: id
               productBlueprintId: productBlueprintId
               status: created
-            - metadata: '{}'
+            - metadata: "{}"
+              tokenStandardType: null
               tokenId: 0.8008281904610115
               tokenURI: tokenURI
               productGroupId: productGroupId
@@ -2880,8 +2937,8 @@ components:
               productBlueprintId: productBlueprintId
               status: created
             item:
-              metadata: '{}'
-              paymentMethodData: ""
+              metadata: "{}"
+              paymentMethodData: null
               productERC721Ids:
               - productERC721Ids
               - productERC721Ids
@@ -2891,6 +2948,7 @@ components:
               updateAt: 2000-01-23T04:56:07.000+00:00
               description: description
               feeRatePermill: 5.637376656633329
+              type: null
               endAt: 2000-01-23T04:56:07.000+00:00
               availableStockNum: 2.3021358869347655
               createAt: 2000-01-23T04:56:07.000+00:00
@@ -2903,6 +2961,7 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               name: name
               previews:
@@ -2918,10 +2977,13 @@ components:
                   eur: 1.4658129805029452
                   usd: 5.962133916683182
                   updateAt: 2000-01-23T04:56:07.000+00:00
+                  currency: null
                   createAt: 2000-01-23T04:56:07.000+00:00
                 transactionAt: 2000-01-23T04:56:07.000+00:00
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                networkId: null
                 id: id
+                chainType: null
                 createAt: 2000-01-23T04:56:07.000+00:00
                 bidPrice: 7.061401241503109
                 transactionHash: transactionHash
@@ -2932,10 +2994,13 @@ components:
                   eur: 1.4658129805029452
                   usd: 5.962133916683182
                   updateAt: 2000-01-23T04:56:07.000+00:00
+                  currency: null
                   createAt: 2000-01-23T04:56:07.000+00:00
                 transactionAt: 2000-01-23T04:56:07.000+00:00
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                networkId: null
                 id: id
+                chainType: null
                 createAt: 2000-01-23T04:56:07.000+00:00
                 bidPrice: 7.061401241503109
                 transactionHash: transactionHash
@@ -2944,8 +3009,10 @@ components:
             updateAt: 2000-01-23T04:56:07.000+00:00
             id: id
             createAt: 2000-01-23T04:56:07.000+00:00
+            status: null
           - productsData:
-            - metadata: '{}'
+            - metadata: "{}"
+              tokenStandardType: null
               tokenId: 0.8008281904610115
               tokenURI: tokenURI
               productGroupId: productGroupId
@@ -2957,7 +3024,8 @@ components:
               id: id
               productBlueprintId: productBlueprintId
               status: created
-            - metadata: '{}'
+            - metadata: "{}"
+              tokenStandardType: null
               tokenId: 0.8008281904610115
               tokenURI: tokenURI
               productGroupId: productGroupId
@@ -2970,8 +3038,8 @@ components:
               productBlueprintId: productBlueprintId
               status: created
             item:
-              metadata: '{}'
-              paymentMethodData: ""
+              metadata: "{}"
+              paymentMethodData: null
               productERC721Ids:
               - productERC721Ids
               - productERC721Ids
@@ -2981,6 +3049,7 @@ components:
               updateAt: 2000-01-23T04:56:07.000+00:00
               description: description
               feeRatePermill: 5.637376656633329
+              type: null
               endAt: 2000-01-23T04:56:07.000+00:00
               availableStockNum: 2.3021358869347655
               createAt: 2000-01-23T04:56:07.000+00:00
@@ -2993,6 +3062,7 @@ components:
                 eur: 1.4658129805029452
                 usd: 5.962133916683182
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                currency: null
                 createAt: 2000-01-23T04:56:07.000+00:00
               name: name
               previews:
@@ -3008,10 +3078,13 @@ components:
                   eur: 1.4658129805029452
                   usd: 5.962133916683182
                   updateAt: 2000-01-23T04:56:07.000+00:00
+                  currency: null
                   createAt: 2000-01-23T04:56:07.000+00:00
                 transactionAt: 2000-01-23T04:56:07.000+00:00
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                networkId: null
                 id: id
+                chainType: null
                 createAt: 2000-01-23T04:56:07.000+00:00
                 bidPrice: 7.061401241503109
                 transactionHash: transactionHash
@@ -3022,10 +3095,13 @@ components:
                   eur: 1.4658129805029452
                   usd: 5.962133916683182
                   updateAt: 2000-01-23T04:56:07.000+00:00
+                  currency: null
                   createAt: 2000-01-23T04:56:07.000+00:00
                 transactionAt: 2000-01-23T04:56:07.000+00:00
                 updateAt: 2000-01-23T04:56:07.000+00:00
+                networkId: null
                 id: id
+                chainType: null
                 createAt: 2000-01-23T04:56:07.000+00:00
                 bidPrice: 7.061401241503109
                 transactionHash: transactionHash
@@ -3034,19 +3110,21 @@ components:
             updateAt: 2000-01-23T04:56:07.000+00:00
             id: id
             createAt: 2000-01-23T04:56:07.000+00:00
-        meta: '{}'
+            status: null
+        meta: "{}"
       properties:
         data:
-          $ref: '#/components/schemas/inline_response_200_6_data'
+          $ref: '#/components/schemas/GetBoughtItemStocksByWalletAddress_200_response_data'
         meta:
           type: object
       required:
       - data
       - meta
       type: object
-    inline_response_200_7:
+    GetItemStockPhysicalShippingInfoStatusByItemStockId_200_response:
       example:
-        meta: '{}'
+        data: null
+        meta: "{}"
       properties:
         data:
           $ref: '#/components/schemas/ItemStockPhysicalShippingInfoStatus'
@@ -3056,7 +3134,7 @@ components:
       - data
       - meta
       type: object
-    _sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data_message:
+    GetItemStockPhysicalShippingInfoByItemStockId_request_data_message:
       properties:
         walletAddress:
           type: string
@@ -3064,14 +3142,14 @@ components:
           pattern: ^\d+$
           type: string
       type: object
-    _sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data:
+    GetItemStockPhysicalShippingInfoByItemStockId_request_data:
       properties:
         domain:
           $ref: '#/components/schemas/SignatureDomain'
         primaryType:
           type: string
         message:
-          $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data_message'
+          $ref: '#/components/schemas/GetItemStockPhysicalShippingInfoByItemStockId_request_data_message'
         types:
           type: object
       required:
@@ -3080,17 +3158,17 @@ components:
       - primaryType
       - types
       type: object
-    inline_object:
+    GetItemStockPhysicalShippingInfoByItemStockId_request:
       properties:
         data:
-          $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_getItemStockPhysicalShippingInfoByItemStockId_data'
+          $ref: '#/components/schemas/GetItemStockPhysicalShippingInfoByItemStockId_request_data'
         signature:
           type: string
       required:
       - data
       - signature
       type: object
-    inline_response_200_8:
+    GetItemStockPhysicalShippingInfoByItemStockId_200_response:
       example:
         data:
           lastName: lastName
@@ -3105,7 +3183,8 @@ components:
           id: id
           state: state
           email: email
-        meta: '{}'
+          status: null
+        meta: "{}"
       properties:
         data:
           $ref: '#/components/schemas/ItemStockPhysicalShippingInfo'
@@ -3115,7 +3194,7 @@ components:
       - data
       - meta
       type: object
-    _sdk_v4_itemStockPhysicalShippingInfos_createOrUpdateItemStockPhysicalShippingInfo_data:
+    CreateOrUpdateItemStockPhysicalShippingInfo_request_data:
       properties:
         domain:
           $ref: '#/components/schemas/SignatureDomain'
@@ -3131,20 +3210,20 @@ components:
       - primaryType
       - types
       type: object
-    inline_object_1:
+    CreateOrUpdateItemStockPhysicalShippingInfo_request:
       properties:
         data:
-          $ref: '#/components/schemas/_sdk_v4_itemStockPhysicalShippingInfos_createOrUpdateItemStockPhysicalShippingInfo_data'
+          $ref: '#/components/schemas/CreateOrUpdateItemStockPhysicalShippingInfo_request_data'
         signature:
           type: string
       required:
       - data
       - signature
       type: object
-    inline_response_200_9:
+    CreateOrUpdateItemStockPhysicalShippingInfo_200_response:
       example:
         data: data
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
           type: string
@@ -3154,10 +3233,11 @@ components:
       - data
       - meta
       type: object
-    inline_response_200_10:
+    GetProductERC721ById_200_response:
       example:
         data:
-          metadata: '{}'
+          metadata: "{}"
+          tokenStandardType: null
           tokenId: 0.8008281904610115
           tokenURI: tokenURI
           productGroupId: productGroupId
@@ -3169,7 +3249,7 @@ components:
           id: id
           productBlueprintId: productBlueprintId
           status: created
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
           $ref: '#/components/schemas/ProductERC721'
@@ -3179,18 +3259,20 @@ components:
       - data
       - meta
       type: object
-    inline_response_200_11:
+    GetPaymentIntentById_200_response:
       example:
         data:
           cryptoPaymentIntentId: cryptoPaymentIntentId
           contractMethodResource:
             args:
-            - ""
-            - ""
+            - null
+            - null
             contractAddress: contractAddress
             methodName: methodName
             abi: abi
-        meta: '{}'
+            networkId: null
+            chainType: null
+        meta: "{}"
       properties:
         data:
           $ref: '#/components/schemas/GetPaymentIntentByIdResponseBodyData'
@@ -3200,7 +3282,7 @@ components:
       - data
       - meta
       type: object
-    inline_response_200_12:
+    GetTokenERC721sByWalletAddress_200_response:
       example:
         data:
         - transferHistory:
@@ -3210,7 +3292,8 @@ components:
           - from: from
             to: to
             transactionHash: transactionHash
-          metadata: '{}'
+          metadata: "{}"
+          tokenStandardType: null
           tokenId: 0.8008281904610115
           tokenURI: tokenURI
           mintTransactionHash: mintTransactionHash
@@ -3227,7 +3310,8 @@ components:
           - from: from
             to: to
             transactionHash: transactionHash
-          metadata: '{}'
+          metadata: "{}"
+          tokenStandardType: null
           tokenId: 0.8008281904610115
           tokenURI: tokenURI
           mintTransactionHash: mintTransactionHash
@@ -3237,7 +3321,7 @@ components:
           id: id
           createAt: 2000-01-23T04:56:07.000+00:00
           initialOwnerAddress: initialOwnerAddress
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
           items:
@@ -3249,10 +3333,10 @@ components:
       - data
       - meta
       type: object
-    inline_response_200_13:
+    HasNfts_200_response:
       example:
         data: true
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
           type: boolean
@@ -3262,7 +3346,7 @@ components:
       - data
       - meta
       type: object
-    inline_response_200_14:
+    GetTokenERC721ById_200_response:
       example:
         data:
           transferHistory:
@@ -3272,7 +3356,8 @@ components:
           - from: from
             to: to
             transactionHash: transactionHash
-          metadata: '{}'
+          metadata: "{}"
+          tokenStandardType: null
           tokenId: 0.8008281904610115
           tokenURI: tokenURI
           mintTransactionHash: mintTransactionHash
@@ -3282,7 +3367,7 @@ components:
           id: id
           createAt: 2000-01-23T04:56:07.000+00:00
           initialOwnerAddress: initialOwnerAddress
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
           $ref: '#/components/schemas/TokenERC721'
@@ -3292,7 +3377,7 @@ components:
       - data
       - meta
       type: object
-    inline_response_200_15_data:
+    GetProfile_200_response_data:
       example:
         profile:
           twitterAccountName: twitterAccountName
@@ -3313,7 +3398,7 @@ components:
       - avatarImageUrl
       - profile
       type: object
-    inline_response_200_15:
+    GetProfile_200_response:
       example:
         data:
           profile:
@@ -3325,17 +3410,17 @@ components:
             walletAddress: walletAddress
             instagramAccountName: instagramAccountName
           avatarImageUrl: avatarImageUrl
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
-          $ref: '#/components/schemas/inline_response_200_15_data'
+          $ref: '#/components/schemas/GetProfile_200_response_data'
         meta:
           type: object
       required:
       - data
       - meta
       type: object
-    inline_object_2:
+    UpdateProfile_request:
       properties:
         profile:
           $ref: '#/components/schemas/WalletAddressProfile'
@@ -3345,7 +3430,7 @@ components:
       - profile
       - signature
       type: object
-    inline_response_200_16_data:
+    UpdateProfile_200_response_data:
       example:
         profile:
           twitterAccountName: twitterAccountName
@@ -3359,7 +3444,7 @@ components:
         profile:
           $ref: '#/components/schemas/WalletAddressProfile'
       type: object
-    inline_response_200_16:
+    UpdateProfile_200_response:
       example:
         data:
           profile:
@@ -3370,14 +3455,14 @@ components:
             bio: bio
             walletAddress: walletAddress
             instagramAccountName: instagramAccountName
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
-          $ref: '#/components/schemas/inline_response_200_16_data'
+          $ref: '#/components/schemas/UpdateProfile_200_response_data'
         meta:
           type: object
       type: object
-    inline_response_200_17_data:
+    GetAvatar_200_response_data:
       example:
         imageId: imageId
         uploadSignedUrl: uploadSignedUrl
@@ -3394,29 +3479,32 @@ components:
       - readSignedUrl
       - uploadSignedUrl
       type: object
-    inline_response_200_17:
+    GetAvatar_200_response:
       example:
         data:
           imageId: imageId
           uploadSignedUrl: uploadSignedUrl
           readSignedUrl: readSignedUrl
-        meta: '{}'
+        meta: "{}"
       properties:
         meta:
           type: object
         data:
-          $ref: '#/components/schemas/inline_response_200_17_data'
+          $ref: '#/components/schemas/GetAvatar_200_response_data'
       type: object
-    inline_response_200_18:
+    getContractERC721ById_200_response:
       example:
         data:
           address: address
+          tokenStandardType: null
           name: name
           updateAt: 2000-01-23T04:56:07.000+00:00
+          networkId: null
           id: id
+          chainType: null
           createAt: 2000-01-23T04:56:07.000+00:00
           initialDeployBlockNumber: 0.8008281904610115
-        meta: '{}'
+        meta: "{}"
       properties:
         data:
           $ref: '#/components/schemas/ContractERC721'
@@ -3426,7 +3514,7 @@ components:
       - data
       - meta
       type: object
-    inline_object_3:
+    CreateStripePaymentIntent_request:
       properties:
         itemId:
           description: Item id that will be purchased
@@ -3441,7 +3529,7 @@ components:
       - toAddress
       - userResidence
       type: object
-    inline_response_200_19:
+    CreateStripePaymentIntent_200_response:
       example:
         publishableKey: publishableKey
         secret: secret
@@ -3456,14 +3544,22 @@ components:
       - publishableKey
       - secret
       type: object
+    Item_paymentMethodData:
+      description: paymentMethodによって異なるデータ
+      oneOf:
+      - $ref: '#/components/schemas/ItemPaymentMethodDataEthereumContractERC721ShopFixedPrice'
+      - $ref: '#/components/schemas/ItemPaymentMethodDataEthereumContractERC721ShopAuction'
+      - $ref: '#/components/schemas/ItemPaymentMethodDataCreditCardStripeFixedPrice'
     GetPaymentIntentByIdResponseBodyData_contractMethodResource:
       example:
         args:
-        - ""
-        - ""
+        - null
+        - null
         contractAddress: contractAddress
         methodName: methodName
         abi: abi
+        networkId: null
+        chainType: null
       properties:
         contractAddress:
           type: string
@@ -3477,14 +3573,7 @@ components:
           type: string
         args:
           items:
-            oneOf:
-            - type: string
-            - type: number
-            - type: integer
-            - type: boolean
-            - items: {}
-              type: array
-            - type: object
+            $ref: '#/components/schemas/OneOfAny'
           type: array
       required:
       - abi
