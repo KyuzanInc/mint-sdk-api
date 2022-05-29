@@ -21,14 +21,14 @@ type GetPaymentIntentByIdResponseBodyDataContractMethodResource struct {
 	ChainType ChainType `json:"chainType"`
 	MethodName string `json:"methodName"`
 	Abi string `json:"abi"`
-	Args []OneOfAny `json:"args"`
+	Args []interface{} `json:"args"`
 }
 
 // NewGetPaymentIntentByIdResponseBodyDataContractMethodResource instantiates a new GetPaymentIntentByIdResponseBodyDataContractMethodResource object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetPaymentIntentByIdResponseBodyDataContractMethodResource(contractAddress string, networkId NetworkId, chainType ChainType, methodName string, abi string, args []OneOfAny) *GetPaymentIntentByIdResponseBodyDataContractMethodResource {
+func NewGetPaymentIntentByIdResponseBodyDataContractMethodResource(contractAddress string, networkId NetworkId, chainType ChainType, methodName string, abi string, args []interface{}) *GetPaymentIntentByIdResponseBodyDataContractMethodResource {
 	this := GetPaymentIntentByIdResponseBodyDataContractMethodResource{}
 	this.ContractAddress = contractAddress
 	this.NetworkId = networkId
@@ -168,9 +168,9 @@ func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) SetAbi(v st
 }
 
 // GetArgs returns the Args field value
-func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgs() []OneOfAny {
+func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgs() []interface{} {
 	if o == nil {
-		var ret []OneOfAny
+		var ret []interface{}
 		return ret
 	}
 
@@ -179,7 +179,7 @@ func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgs() [
 
 // GetArgsOk returns a tuple with the Args field value
 // and a boolean to check if the value has been set.
-func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgsOk() ([]OneOfAny, bool) {
+func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgsOk() ([]interface{}, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -187,7 +187,7 @@ func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgsOk()
 }
 
 // SetArgs sets field value
-func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) SetArgs(v []OneOfAny) {
+func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) SetArgs(v []interface{}) {
 	o.Args = v
 }
 

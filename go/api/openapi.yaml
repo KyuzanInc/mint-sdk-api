@@ -1428,8 +1428,8 @@ components:
         cryptoPaymentIntentId: cryptoPaymentIntentId
         contractMethodResource:
           args:
-          - null
-          - null
+          - ""
+          - ""
           contractAddress: contractAddress
           methodName: methodName
           abi: abi
@@ -2043,24 +2043,6 @@ components:
       - walletAddress
       title: WalletAddressProfile
       type: object
-    OneOfAny:
-      oneOf:
-      - type: string
-      - type: number
-      - type: integer
-      - type: boolean
-      - items: {}
-        type: array
-      - type: object
-    AnyOfAny:
-      anyOf:
-      - type: string
-      - type: number
-      - type: integer
-      - type: boolean
-      - items: {}
-        type: array
-      - type: object
     GetItems_200_response:
       example:
         data:
@@ -2330,15 +2312,14 @@ components:
       example:
         signature: signature
         contractMethodArg:
-        - null
-        - null
+        - ""
+        - ""
       properties:
         signature:
           type: string
         contractMethodArg:
           description: 対応したコントラクトのメソッドに渡す
-          items:
-            $ref: '#/components/schemas/AnyOfAny'
+          items: {}
           type: array
       required:
       - contractMethodArg
@@ -2349,8 +2330,8 @@ components:
         data:
           signature: signature
           contractMethodArg:
-          - null
-          - null
+          - ""
+          - ""
         meta: "{}"
       properties:
         data:
@@ -3265,8 +3246,8 @@ components:
           cryptoPaymentIntentId: cryptoPaymentIntentId
           contractMethodResource:
             args:
-            - null
-            - null
+            - ""
+            - ""
             contractAddress: contractAddress
             methodName: methodName
             abi: abi
@@ -3553,8 +3534,8 @@ components:
     GetPaymentIntentByIdResponseBodyData_contractMethodResource:
       example:
         args:
-        - null
-        - null
+        - ""
+        - ""
         contractAddress: contractAddress
         methodName: methodName
         abi: abi
@@ -3572,8 +3553,7 @@ components:
         abi:
           type: string
         args:
-          items:
-            $ref: '#/components/schemas/OneOfAny'
+          items: {}
           type: array
       required:
       - abi

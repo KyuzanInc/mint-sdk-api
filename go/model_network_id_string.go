@@ -18,13 +18,14 @@ import (
 // NetworkIdString the model 'NetworkIdString'
 type NetworkIdString string
 
+// TODO: Manually edited these names to avoid name collision with `NetworkId`
 // List of NetworkIdString
 const (
-	_1 NetworkIdString = "1"
-	_4 NetworkIdString = "4"
-	_80001 NetworkIdString = "80001"
-	_137 NetworkIdString = "137"
-	_31337 NetworkIdString = "31337"
+	_1String NetworkIdString = "1"
+	_4String NetworkIdString = "4"
+	_80001String NetworkIdString = "80001"
+	_137String NetworkIdString = "137"
+	_31337String NetworkIdString = "31337"
 )
 
 // All allowed values of NetworkIdString enum

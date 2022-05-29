@@ -9,7 +9,7 @@ GO_OUTPUT := go
 
 go:
 	@mkdir -p ./go
-	@npx openapi-generator-cli generate -g go -i api.yaml -o $(GO_OUTPUT) --git-repo-id="mint-sdk-api/go" --git-user-id="KyuzanInc"
+	@npx openapi-generator-cli generate -g go -i api.yaml -o $(GO_OUTPUT) --git-repo-id="mint-sdk-api/go" --git-user-id="KyuzanInc" --skip-validate-spec
 
 JS_OUTPUT := js/src/apiClient
 

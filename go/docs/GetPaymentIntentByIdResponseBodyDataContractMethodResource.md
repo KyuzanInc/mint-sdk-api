@@ -9,13 +9,13 @@ Name | Type | Description | Notes
 **ChainType** | [**ChainType**](ChainType.md) |  | 
 **MethodName** | **string** |  | 
 **Abi** | **string** |  | 
-**Args** | [**[]OneOfAny**](OneOfAny.md) |  | 
+**Args** | **[]interface{}** |  | 
 
 ## Methods
 
 ### NewGetPaymentIntentByIdResponseBodyDataContractMethodResource
 
-`func NewGetPaymentIntentByIdResponseBodyDataContractMethodResource(contractAddress string, networkId NetworkId, chainType ChainType, methodName string, abi string, args []OneOfAny, ) *GetPaymentIntentByIdResponseBodyDataContractMethodResource`
+`func NewGetPaymentIntentByIdResponseBodyDataContractMethodResource(contractAddress string, networkId NetworkId, chainType ChainType, methodName string, abi string, args []interface{}, ) *GetPaymentIntentByIdResponseBodyDataContractMethodResource`
 
 NewGetPaymentIntentByIdResponseBodyDataContractMethodResource instantiates a new GetPaymentIntentByIdResponseBodyDataContractMethodResource object
 This constructor will assign default values to properties that have it defined,
@@ -132,20 +132,20 @@ SetAbi sets Abi field to given value.
 
 ### GetArgs
 
-`func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgs() []OneOfAny`
+`func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgs() []interface{}`
 
 GetArgs returns the Args field if non-nil, zero value otherwise.
 
 ### GetArgsOk
 
-`func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgsOk() (*[]OneOfAny, bool)`
+`func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) GetArgsOk() (*[]interface{}, bool)`
 
 GetArgsOk returns a tuple with the Args field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetArgs
 
-`func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) SetArgs(v []OneOfAny)`
+`func (o *GetPaymentIntentByIdResponseBodyDataContractMethodResource) SetArgs(v []interface{})`
 
 SetArgs sets Args field to given value.
 

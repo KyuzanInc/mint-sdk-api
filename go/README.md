@@ -105,7 +105,6 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
- - [AnyOfAny](docs/AnyOfAny.md)
  - [Bid](docs/Bid.md)
  - [ChainType](docs/ChainType.md)
  - [ContractDataERC721Shop](docs/ContractDataERC721Shop.md)
@@ -159,7 +158,6 @@ Class | Method | HTTP request | Description
  - [ItemType](docs/ItemType.md)
  - [NetworkId](docs/NetworkId.md)
  - [NetworkIdString](docs/NetworkIdString.md)
- - [OneOfAny](docs/OneOfAny.md)
  - [PreviewMedia](docs/PreviewMedia.md)
  - [ProductERC721](docs/ProductERC721.md)
  - [SignatureDomain](docs/SignatureDomain.md)

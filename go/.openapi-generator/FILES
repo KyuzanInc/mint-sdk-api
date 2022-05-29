@@ -1,11 +1,11 @@
 .gitignore
+.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
 api_default.go
 client.go
 configuration.go
-docs/AnyOfAny.md
 docs/Bid.md
 docs/ChainType.md
 docs/ContractDataERC721Shop.md
@@ -60,7 +60,6 @@ docs/ItemStockStatus.md
 docs/ItemType.md
 docs/NetworkId.md
 docs/NetworkIdString.md
-docs/OneOfAny.md
 docs/PreviewMedia.md
 docs/ProductERC721.md
 docs/SignatureDomain.md
@@ -76,7 +75,6 @@ docs/WalletAddressProfile.md
 git_push.sh
 go.mod
 go.sum
-model_any_of_any.go
 model_bid.go
 model_chain_type.go
 model_contract_data_erc721_shop.go
@@ -130,7 +128,6 @@ model_item_stock_status.go
 model_item_type.go
 model_network_id.go
 model_network_id_string.go
-model_one_of_any.go
 model_preview_media.go
 model_product_erc721.go
 model_signature_domain.go

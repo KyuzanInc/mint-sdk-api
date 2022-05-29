@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Signature** | **string** |  | 
-**ContractMethodArg** | [**[]AnyOfAny**](AnyOfAny.md) | 対応したコントラクトのメソッドに渡す | 
+**ContractMethodArg** | **[]interface{}** | 対応したコントラクトのメソッドに渡す | 
 
 ## Methods
 
 ### NewGetSignByItemStockId200ResponseData
 
-`func NewGetSignByItemStockId200ResponseData(signature string, contractMethodArg []AnyOfAny, ) *GetSignByItemStockId200ResponseData`
+`func NewGetSignByItemStockId200ResponseData(signature string, contractMethodArg []interface{}, ) *GetSignByItemStockId200ResponseData`
 
 NewGetSignByItemStockId200ResponseData instantiates a new GetSignByItemStockId200ResponseData object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetSignature sets Signature field to given value.
 
 ### GetContractMethodArg
 
-`func (o *GetSignByItemStockId200ResponseData) GetContractMethodArg() []AnyOfAny`
+`func (o *GetSignByItemStockId200ResponseData) GetContractMethodArg() []interface{}`
 
 GetContractMethodArg returns the ContractMethodArg field if non-nil, zero value otherwise.
 
 ### GetContractMethodArgOk
 
-`func (o *GetSignByItemStockId200ResponseData) GetContractMethodArgOk() (*[]AnyOfAny, bool)`
+`func (o *GetSignByItemStockId200ResponseData) GetContractMethodArgOk() (*[]interface{}, bool)`
 
 GetContractMethodArgOk returns a tuple with the ContractMethodArg field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContractMethodArg
 
-`func (o *GetSignByItemStockId200ResponseData) SetContractMethodArg(v []AnyOfAny)`
+`func (o *GetSignByItemStockId200ResponseData) SetContractMethodArg(v []interface{})`
 
 SetContractMethodArg sets ContractMethodArg field to given value.
 

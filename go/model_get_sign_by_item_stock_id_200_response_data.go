@@ -18,14 +18,14 @@ import (
 type GetSignByItemStockId200ResponseData struct {
 	Signature string `json:"signature"`
 	// 対応したコントラクトのメソッドに渡す
-	ContractMethodArg []AnyOfAny `json:"contractMethodArg"`
+	ContractMethodArg []interface{} `json:"contractMethodArg"`
 }
 
 // NewGetSignByItemStockId200ResponseData instantiates a new GetSignByItemStockId200ResponseData object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetSignByItemStockId200ResponseData(signature string, contractMethodArg []AnyOfAny) *GetSignByItemStockId200ResponseData {
+func NewGetSignByItemStockId200ResponseData(signature string, contractMethodArg []interface{}) *GetSignByItemStockId200ResponseData {
 	this := GetSignByItemStockId200ResponseData{}
 	this.Signature = signature
 	this.ContractMethodArg = contractMethodArg
@@ -65,9 +65,9 @@ func (o *GetSignByItemStockId200ResponseData) SetSignature(v string) {
 }
 
 // GetContractMethodArg returns the ContractMethodArg field value
-func (o *GetSignByItemStockId200ResponseData) GetContractMethodArg() []AnyOfAny {
+func (o *GetSignByItemStockId200ResponseData) GetContractMethodArg() []interface{} {
 	if o == nil {
-		var ret []AnyOfAny
+		var ret []interface{}
 		return ret
 	}
 
@@ -76,7 +76,7 @@ func (o *GetSignByItemStockId200ResponseData) GetContractMethodArg() []AnyOfAny 
 
 // GetContractMethodArgOk returns a tuple with the ContractMethodArg field value
 // and a boolean to check if the value has been set.
-func (o *GetSignByItemStockId200ResponseData) GetContractMethodArgOk() ([]AnyOfAny, bool) {
+func (o *GetSignByItemStockId200ResponseData) GetContractMethodArgOk() ([]interface{}, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -84,7 +84,7 @@ func (o *GetSignByItemStockId200ResponseData) GetContractMethodArgOk() ([]AnyOfA
 }
 
 // SetContractMethodArg sets field value
-func (o *GetSignByItemStockId200ResponseData) SetContractMethodArg(v []AnyOfAny) {
+func (o *GetSignByItemStockId200ResponseData) SetContractMethodArg(v []interface{}) {
 	o.ContractMethodArg = v
 }
 
