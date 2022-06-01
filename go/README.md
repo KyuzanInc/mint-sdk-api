@@ -157,7 +157,6 @@ Class | Method | HTTP request | Description
  - [ItemStockStatus](docs/ItemStockStatus.md)
  - [ItemType](docs/ItemType.md)
  - [NetworkId](docs/NetworkId.md)
- - [NetworkIdString](docs/NetworkIdString.md)
  - [PreviewMedia](docs/PreviewMedia.md)
  - [ProductERC721](docs/ProductERC721.md)
  - [SignatureDomain](docs/SignatureDomain.md)

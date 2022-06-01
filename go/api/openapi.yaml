@@ -1447,7 +1447,7 @@ components:
     SignatureDomain:
       properties:
         chainId:
-          $ref: '#/components/schemas/NetworkIdString'
+          type: string
         name:
           type: string
         version:
@@ -1938,14 +1938,6 @@ components:
       - 137
       - 31337
       type: number
-    NetworkIdString:
-      enum:
-      - "1"
-      - "4"
-      - "80001"
-      - "137"
-      - "31337"
-      type: string
     ItemStockPhysicalShippingInfoStatus:
       enum:
       - shipping-address-not-registered

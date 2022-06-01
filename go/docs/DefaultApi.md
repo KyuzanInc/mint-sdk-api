@@ -51,7 +51,7 @@ import (
 func main() {
     mintAccessToken := "mintAccessToken_example" // string | 
     itemStockId := "itemStockId_example" // string | 
-    createOrUpdateItemStockPhysicalShippingInfoRequest := *openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequest(*openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequestData(*openapiclient.NewSignatureDomain(openapiclient.NetworkIdString("1"), "Name_example", "Version_example"), "PrimaryType_example", *openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage("FirstName_example", "LastName_example", "Country_example", "Email_example", "PostalCode_example", "City_example", "State_example", "Address1_example", "PhoneNumber_example", "Address2_example", "Address3_example", "RequestTimestamp_example"), map[string]interface{}(123)), "Signature_example") // CreateOrUpdateItemStockPhysicalShippingInfoRequest |  (optional)
+    createOrUpdateItemStockPhysicalShippingInfoRequest := *openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequest(*openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequestData(*openapiclient.NewSignatureDomain("ChainId_example", "Name_example", "Version_example"), "PrimaryType_example", *openapiclient.NewCreateOrUpdateItemStockPhysicalShippingInfoRequestBodyMessage("FirstName_example", "LastName_example", "Country_example", "Email_example", "PostalCode_example", "City_example", "State_example", "Address1_example", "PhoneNumber_example", "Address2_example", "Address3_example", "RequestTimestamp_example"), map[string]interface{}(123)), "Signature_example") // CreateOrUpdateItemStockPhysicalShippingInfoRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -667,7 +667,7 @@ import (
 func main() {
     mintAccessToken := "mintAccessToken_example" // string | 
     itemStockId := "itemStockId_example" // string | 
-    getItemStockPhysicalShippingInfoByItemStockIdRequest := *openapiclient.NewGetItemStockPhysicalShippingInfoByItemStockIdRequest(*openapiclient.NewGetItemStockPhysicalShippingInfoByItemStockIdRequestData(*openapiclient.NewSignatureDomain(openapiclient.NetworkIdString("1"), "Name_example", "Version_example"), "PrimaryType_example", *openapiclient.NewGetItemStockPhysicalShippingInfoByItemStockIdRequestDataMessage(), map[string]interface{}(123)), "Signature_example") // GetItemStockPhysicalShippingInfoByItemStockIdRequest |  (optional)
+    getItemStockPhysicalShippingInfoByItemStockIdRequest := *openapiclient.NewGetItemStockPhysicalShippingInfoByItemStockIdRequest(*openapiclient.NewGetItemStockPhysicalShippingInfoByItemStockIdRequestData(*openapiclient.NewSignatureDomain("ChainId_example", "Name_example", "Version_example"), "PrimaryType_example", *openapiclient.NewGetItemStockPhysicalShippingInfoByItemStockIdRequestDataMessage(), map[string]interface{}(123)), "Signature_example") // GetItemStockPhysicalShippingInfoByItemStockIdRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

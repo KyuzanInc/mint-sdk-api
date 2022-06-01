@@ -16,7 +16,7 @@ import (
 
 // SignatureDomain struct for SignatureDomain
 type SignatureDomain struct {
-	ChainId NetworkIdString `json:"chainId"`
+	ChainId string `json:"chainId"`
 	Name string `json:"name"`
 	Version string `json:"version"`
 }
@@ -25,7 +25,7 @@ type SignatureDomain struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSignatureDomain(chainId NetworkIdString, name string, version string) *SignatureDomain {
+func NewSignatureDomain(chainId string, name string, version string) *SignatureDomain {
 	this := SignatureDomain{}
 	this.ChainId = chainId
 	this.Name = name
@@ -42,9 +42,9 @@ func NewSignatureDomainWithDefaults() *SignatureDomain {
 }
 
 // GetChainId returns the ChainId field value
-func (o *SignatureDomain) GetChainId() NetworkIdString {
+func (o *SignatureDomain) GetChainId() string {
 	if o == nil {
-		var ret NetworkIdString
+		var ret string
 		return ret
 	}
 
@@ -53,7 +53,7 @@ func (o *SignatureDomain) GetChainId() NetworkIdString {
 
 // GetChainIdOk returns a tuple with the ChainId field value
 // and a boolean to check if the value has been set.
-func (o *SignatureDomain) GetChainIdOk() (*NetworkIdString, bool) {
+func (o *SignatureDomain) GetChainIdOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -61,7 +61,7 @@ func (o *SignatureDomain) GetChainIdOk() (*NetworkIdString, bool) {
 }
 
 // SetChainId sets field value
-func (o *SignatureDomain) SetChainId(v NetworkIdString) {
+func (o *SignatureDomain) SetChainId(v string) {
 	o.ChainId = v
 }
 

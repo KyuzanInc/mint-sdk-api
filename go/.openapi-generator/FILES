@@ -59,7 +59,6 @@ docs/ItemStockPhysicalShippingInfoStatus.md
 docs/ItemStockStatus.md
 docs/ItemType.md
 docs/NetworkId.md
-docs/NetworkIdString.md
 docs/PreviewMedia.md
 docs/ProductERC721.md
 docs/SignatureDomain.md
@@ -127,7 +126,6 @@ model_item_stock_physical_shipping_info_status.go
 model_item_stock_status.go
 model_item_type.go
 model_network_id.go
-model_network_id_string.go
 model_preview_media.go
 model_product_erc721.go
 model_signature_domain.go

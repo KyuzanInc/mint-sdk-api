@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ChainId** | [**NetworkIdString**](NetworkIdString.md) |  | 
+**ChainId** | **string** |  | 
 **Name** | **string** |  | 
 **Version** | **string** |  | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewSignatureDomain
 
-`func NewSignatureDomain(chainId NetworkIdString, name string, version string, ) *SignatureDomain`
+`func NewSignatureDomain(chainId string, name string, version string, ) *SignatureDomain`
 
 NewSignatureDomain instantiates a new SignatureDomain object
 This constructor will assign default values to properties that have it defined,
@@ -29,20 +29,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetChainId
 
-`func (o *SignatureDomain) GetChainId() NetworkIdString`
+`func (o *SignatureDomain) GetChainId() string`
 
 GetChainId returns the ChainId field if non-nil, zero value otherwise.
 
 ### GetChainIdOk
 
-`func (o *SignatureDomain) GetChainIdOk() (*NetworkIdString, bool)`
+`func (o *SignatureDomain) GetChainIdOk() (*string, bool)`
 
 GetChainIdOk returns a tuple with the ChainId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetChainId
 
-`func (o *SignatureDomain) SetChainId(v NetworkIdString)`
+`func (o *SignatureDomain) SetChainId(v string)`
 
 SetChainId sets ChainId field to given value.
 

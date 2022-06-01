@@ -1139,7 +1139,7 @@ components:
       type: object
       properties:
         chainId:
-          $ref: '#/components/schemas/NetworkIdString'
+          type: string
         name:
           type: string
         version:
@@ -1460,14 +1460,6 @@ components:
         - 80001
         - 137
         - 31337
-    NetworkIdString:
-      type: string
-      enum:
-        - '1'
-        - '4'
-        - '80001'
-        - '137'
-        - '31337'
     ItemStockPhysicalShippingInfoStatus:
       type: string
       enum:
