@@ -220,14 +220,10 @@ paths:
                         description: 対応したコントラクトのメソッドに渡す
                         type: array
                         items:
-                          anyOf:
-                            - type: string
-                            - type: number
-                            - type: integer
-                            - type: boolean
-                            - type: array
-                              items: {}
-                            - type: object
+                          # TODO: `oneOf` and `anyOf` are not properly handled https://github.com/OpenAPITools/openapi-generator/issues/2622
+                          # Even if we use $ref, this issue is not resolved https://github.com/OpenAPITools/openapi-generator/issues/8086
+                          AnyValue:
+                            description: Can be any value - string, number, boolean, array or object.
                     required:
                       - signature
                       - contractMethodArg
@@ -1124,14 +1120,10 @@ components:
             args:
               type: array
               items:
-                oneOf:
-                  - type: string
-                  - type: number
-                  - type: integer
-                  - type: boolean
-                  - type: array
-                    items: {}
-                  - type: object
+                # TODO: `oneOf` and `anyOf` are not properly handled https://github.com/OpenAPITools/openapi-generator/issues/2622
+                # Even if we use $ref, this issue is not resolved https://github.com/OpenAPITools/openapi-generator/issues/8086
+                AnyValue:
+                  description: Can be any value - string, number, boolean, array or object.
 
           required:
             - contractAddress
@@ -1147,7 +1139,7 @@ components:
       type: object
       properties:
         chainId:
-          $ref: '#/components/schemas/NetworkIdString'
+          type: string
         name:
           type: string
         version:
@@ -1468,14 +1460,6 @@ components:
         - 80001
         - 137
         - 31337
-    NetworkIdString:
-      type: string
-      enum:
-        - '1'
-        - '4'
-        - '80001'
-        - '137'
-        - '31337'
     ItemStockPhysicalShippingInfoStatus:
       type: string
       enum:
