@@ -2,6 +2,6 @@
   "name": "mint-sdk-api",
   "version": "1.0.0",
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "2.5.1"
+    "@openapitools/openapi-generator-cli": "2.14.1"
   }
 }
